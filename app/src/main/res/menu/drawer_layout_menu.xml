@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:title="Track your health"
+        android:icon="@drawable/receipts_logo"
+        android:id="@+id/trackYourHealth" />
+    <item
+        android:title="User health"
+        android:icon="@drawable/wallet_logo"
+        android:id="@+id/userHealth"
+        />
+    <item
+        android:title="Doctor List"
+        android:icon="@drawable/categories"
+        android:id="@+id/doctorList"
+        />
+    <item
+        android:id="@+id/medicalList"
+        android:title="Medicine List"
+        android:icon="@drawable/analysis_logo"
+        />
+    <item
+        android:id="@+id/expenses"
+        android:title="Expenses"
+        android:icon="@drawable/alerts_logo"
+        />
+    <item
+        android:id="@+id/visitExperience"
+        android:title="Visit Experience"
+        android:icon="@drawable/alerts_logo"
+        />
+</menu>
