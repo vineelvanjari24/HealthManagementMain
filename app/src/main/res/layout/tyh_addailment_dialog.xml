@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="24sp"
-        android:text="xkjbnv "
+        android:text=""
         android:id="@+id/tyh_ailment_text1"
         />
 
@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:textSize="24sp"
         android:id="@+id/tyh_ailment_text2"
-        android:text=" "
+        android:text=""
         />
 
     <EditText
