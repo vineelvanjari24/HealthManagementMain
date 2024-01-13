@@ -12,6 +12,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.polytechnic.healthmanagement.R;
+import com.polytechnic.healthmanagement.UserHealth.AddUserHealthActivity;
 import com.polytechnic.healthmanagement.UserHealth.Model.UserHealthModel;
 
 import java.util.ArrayList;
@@ -39,9 +40,13 @@ public class UserHealthAdapter extends RecyclerView.Adapter<UserHealthAdapter.Vi
         holder.createdDateTV.setText(arrayList.get(position).createdDate);
         holder.editedDateTV.setText(arrayList.get(position).editedDate);
         holder.cardView.setOnClickListener(v ->{
-            Intent intent = new Intent(context,UserHealthAdapter.class);
-
-
+            Intent intent = new Intent(context, AddUserHealthActivity.class);
+            intent.getBooleanExtra("flag",false);
+            intent.putExtra("issue",arrayList.get(position).issue);
+            intent.putExtra("description",arrayList.get(position).description);
+            intent.putExtra("spinner",arrayList.get(position).problemRelatedTo);
+            intent.putExtra("id",arrayList.get(position).id);
+            context.startActivity(intent);
         });
     }
 
