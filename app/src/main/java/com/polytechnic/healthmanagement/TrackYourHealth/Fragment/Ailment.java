@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,13 +19,15 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.polytechnic.healthmanagement.R;
 import com.polytechnic.healthmanagement.TrackYourHealth.Model.TYHTable;
 import com.polytechnic.healthmanagement.TrackYourHealth.RecycleView.AilmentsList;
+import com.polytechnic.healthmanagement.TrackYourHealth.RecycleView.ParticularAilment;
 
 public class Ailment extends AppCompatActivity {
-
+    TextView tv1,tv2;
     EditText v1,v2;
     RecyclerView rv;
     FloatingActionButton fbtn;
     Button dsave,dcancel;
+    Context ac;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,23 +40,32 @@ public class Ailment extends AppCompatActivity {
         tb.P2=b.getString("P2");
         rv=findViewById(R.id.tyh_Ailment_recycleView);
         fbtn=findViewById(R.id.tyh_Ailment_addbtn);
-
+        ac=getApplicationContext();
+        ParticularAilment pa=new ParticularAilment(ac,tb);
+        rv.setLayoutManager(new LinearLayoutManager(ac, LinearLayoutManager.VERTICAL,false));
+        rv.setAdapter(pa);
 
 
         fbtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(android.view.View v) {
-                TextView tv1,tv2;
                 Dialog addAilmentRecord=new Dialog(v.getContext());
                 addAilmentRecord.setContentView(R.layout.tyh_addailment_dialog);
                 addAilmentRecord.setCancelable(false);
                 tv1=addAilmentRecord.findViewById(R.id.tyh_ailment_text1);
                 tv2=addAilmentRecord.findViewById(R.id.tyh_ailment_text2);
-                tv1.setText("ABCD");
-                tv2.setText("EFGH");
+                tv1.setText(tb.P1);
+                tv2.setText(tb.P2);
                 v1=addAilmentRecord.findViewById(R.id.tyh_Ailment_value1);
                 v2=addAilmentRecord.findViewById(R.id.tyh_Ailment_value2);
-                addAilmentRecord.setContentView(R.layout.tyh_addailment_dialog);
+                if (tb.P1.equals("")){
+                    v1.setVisibility(View.INVISIBLE);
+                    tv1.setVisibility(View.INVISIBLE);
+                }
+                if (tb.P2.equals("")){
+                    v2.setVisibility(View.INVISIBLE);
+                    tv2.setVisibility(View.INVISIBLE);
+                }
                 dcancel=addAilmentRecord.findViewById(R.id.tyh_Ailment_Dialog_cancel);
                 dsave=addAilmentRecord.findViewById(R.id.tyh_Ailment_Dialog_save);
                 addAilmentRecord.show();
@@ -69,17 +81,15 @@ public class Ailment extends AppCompatActivity {
                     public void onClick(android.view.View v){
                         TYHTable data=new TYHTable();
                         data.P1=v1.getText().toString();
-                        Log.d("p1",data.P1);
                         data.P2=String.valueOf(v2.getText());
-                        Log.d("p1",data.P2);
                         addAilmentRecord.dismiss();
                         tyhDB db=new tyhDB(getApplicationContext());
                         db.addAilmentRecord(tb,data);
                         Toast.makeText(Ailment.this, "Saved", Toast.LENGTH_SHORT).show();
+                        pa.load(ac,tb);
                     }
                 });
             }
         });
-
     }
 }

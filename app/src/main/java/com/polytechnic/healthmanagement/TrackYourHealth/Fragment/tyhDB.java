@@ -13,7 +13,6 @@ import com.polytechnic.healthmanagement.TrackYourHealth.Model.TYHTable;
 import java.util.ArrayList;
 
 public class tyhDB extends SQLiteOpenHelper {
-    public ArrayList<TYHTable> tables=new ArrayList<>();
     private static final String DBNAME="AilmentsDB";
     private static final int DBVERSION=1;
     public static final String TABLENAME="AilmentsList";
@@ -63,6 +62,19 @@ public class tyhDB extends SQLiteOpenHelper {
         ct.put(t.P2,data.P2);
         SQLiteDatabase db=this.getWritableDatabase();
         db.insert(t.Name,null,ct);
+    }
+
+    public ArrayList<TYHTable> readParticularAilment(String tn){
+        SQLiteDatabase db=this.getReadableDatabase();
+        Cursor cur=db.rawQuery("Select * from "+tn,null);
+        ArrayList<TYHTable> tables=new ArrayList<>();
+        while(cur.moveToNext()){
+            TYHTable t1=new TYHTable();
+            t1.P1=cur.getString(1);
+            t1.P2=cur.getString(2);
+            tables.add(t1);
+        }
+        return tables;
     }
 
     @Override
