@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.telecom.TelecomManager;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,9 +32,29 @@ private TextView issueTV,descriptionTV;
         issueTV=findViewById(R.id.issueUserHealth);
         descriptionTV=findViewById(R.id.descriptionUserHealth);
 
+        LinearLayout linearLayout =findViewById(R.id.edit_delete_exit);
+        LinearLayout linearLayoutMain =findViewById(R.id.linearLayout);
+        if(getIntent().getBooleanExtra("flag",false)){
+            linearLayoutMain.removeView(linearLayout);
+        }
+        else{
+            ImageView edit,delete,cancel;
+                    edit = findViewById(R.id.edit);
+                    delete =findViewById(R.id.delete);
+                    cancel=findViewById(R.id.cancel);
+                    edit.setOnClickListener(v ->{
+                        Toast.makeText(this, "edit", Toast.LENGTH_SHORT).show();
+                    });
+                    delete.setOnClickListener(v ->{
+                        Toast.makeText(this, "delete", Toast.LENGTH_SHORT).show();
+                    });
+                    cancel.setOnClickListener(v ->{
+                        Toast.makeText(this, "cancel", Toast.LENGTH_SHORT).show();
+                    });
+
+        }
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarDrawable);
         setSupportActionBar(toolbar);
-
         if(getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }

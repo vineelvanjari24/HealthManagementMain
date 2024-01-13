@@ -11,8 +11,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:id="@+id/linearLayout"
         >
         <include layout="@layout/toolbar_drawable_layout"/>
+        <include layout="@layout/edit_delete_cancel"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

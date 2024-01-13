@@ -1,12 +1,14 @@
 package com.polytechnic.healthmanagement.UserHealth.RecycleView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.polytechnic.healthmanagement.R;
@@ -36,6 +38,11 @@ public class UserHealthAdapter extends RecyclerView.Adapter<UserHealthAdapter.Vi
         holder.descriptionTV.setText(arrayList.get(position).description);
         holder.createdDateTV.setText(arrayList.get(position).createdDate);
         holder.editedDateTV.setText(arrayList.get(position).editedDate);
+        holder.cardView.setOnClickListener(v ->{
+            Intent intent = new Intent(context,UserHealthAdapter.class);
+
+
+        });
     }
 
     @Override
@@ -44,12 +51,14 @@ public class UserHealthAdapter extends RecyclerView.Adapter<UserHealthAdapter.Vi
     }
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView issueTV,descriptionTV,createdDateTV,editedDateTV;
+        CardView cardView;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             issueTV=itemView.findViewById(R.id.issueUserHealth);
             descriptionTV=itemView.findViewById(R.id.descriptionUserHealth);
             createdDateTV=itemView.findViewById(R.id.createdDateUserHealth);
             editedDateTV=itemView.findViewById(R.id.editedDateUserHealth);
+            cardView=itemView.findViewById(R.id.userHealthCardView);
         }
     }
 }

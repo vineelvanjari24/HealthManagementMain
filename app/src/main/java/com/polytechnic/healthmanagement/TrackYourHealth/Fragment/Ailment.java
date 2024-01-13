@@ -38,47 +38,41 @@ public class Ailment extends AppCompatActivity {
         rv=findViewById(R.id.tyh_Ailment_recycleView);
         fbtn=findViewById(R.id.tyh_Ailment_addbtn);
 
+        fbtn.setOnClickListener(v ->{
+            TextView tv1,tv2;
+            Dialog addAilmentRecord=new Dialog(this);
+            addAilmentRecord.setContentView(R.layout.tyh_addailment_dialog);
+            addAilmentRecord.setCancelable(false);
+            tv1=addAilmentRecord.findViewById(R.id.tyh_ailment_text1);
+            tv2=addAilmentRecord.findViewById(R.id.tyh_ailment_text2);
+            tv1.setText("ABCD");
+            tv2.setText("EFGH");
+            v1=addAilmentRecord.findViewById(R.id.tyh_Ailment_value1);
+            v2=addAilmentRecord.findViewById(R.id.tyh_Ailment_value2);
+            dcancel=addAilmentRecord.findViewById(R.id.tyh_Ailment_Dialog_cancel);
+            dsave=addAilmentRecord.findViewById(R.id.tyh_Ailment_Dialog_save);
+            addAilmentRecord.show();
 
-
-        fbtn.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(android.view.View v) {
-                TextView tv1,tv2;
-                Dialog addAilmentRecord=new Dialog(v.getContext());
-                addAilmentRecord.setContentView(R.layout.tyh_addailment_dialog);
-                addAilmentRecord.setCancelable(false);
-                tv1=addAilmentRecord.findViewById(R.id.tyh_ailment_text1);
-                tv2=addAilmentRecord.findViewById(R.id.tyh_ailment_text2);
-                tv1.setText("ABCD");
-                tv2.setText("EFGH");
-                v1=addAilmentRecord.findViewById(R.id.tyh_Ailment_value1);
-                v2=addAilmentRecord.findViewById(R.id.tyh_Ailment_value2);
-                addAilmentRecord.setContentView(R.layout.tyh_addailment_dialog);
-                dcancel=addAilmentRecord.findViewById(R.id.tyh_Ailment_Dialog_cancel);
-                dsave=addAilmentRecord.findViewById(R.id.tyh_Ailment_Dialog_save);
-                addAilmentRecord.show();
-
-                dcancel.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(android.view.View v) {
-                        addAilmentRecord.dismiss();
-                    }
-                });
-                dsave.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(android.view.View v){
-                        TYHTable data=new TYHTable();
-                        data.P1=v1.getText().toString();
-                        Log.d("p1",data.P1);
-                        data.P2=String.valueOf(v2.getText());
-                        Log.d("p1",data.P2);
-                        addAilmentRecord.dismiss();
-                        tyhDB db=new tyhDB(getApplicationContext());
-                        db.addAilmentRecord(tb,data);
-                        Toast.makeText(Ailment.this, "Saved", Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
+            dcancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(android.view.View v) {
+                    addAilmentRecord.dismiss();
+                }
+            });
+            dsave.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(android.view.View v){
+                    TYHTable data=new TYHTable();
+                    data.P1=v1.getText().toString();
+                    Log.d("p1",data.P1);
+                    data.P2=String.valueOf(v2.getText());
+                    Log.d("p1",data.P2);
+                    addAilmentRecord.dismiss();
+                    tyhDB db=new tyhDB(getApplicationContext());
+                    db.addAilmentRecord(tb,data);
+                    Toast.makeText(Ailment.this, "Saved", Toast.LENGTH_SHORT).show();
+                }
+            });
         });
 
     }

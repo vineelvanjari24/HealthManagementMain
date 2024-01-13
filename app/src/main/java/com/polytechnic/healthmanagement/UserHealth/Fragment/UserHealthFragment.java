@@ -53,6 +53,7 @@ public class UserHealthFragment extends Fragment {
         }
         view.findViewById(R.id.addUserHealth).setOnClickListener(v ->{
             Intent intent =new Intent(context, AddUserHealthActivity.class);
+            intent.putExtra("flag",true);
             startActivityForResult(intent, ADD_ITEM_REQUEST);
 
         });
