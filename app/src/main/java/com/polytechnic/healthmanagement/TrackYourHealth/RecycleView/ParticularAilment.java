@@ -49,7 +49,7 @@ public class ParticularAilment extends RecyclerView.Adapter<ParticularAilment.Pa
         Date d1 = new Date();
         String cusmdate = new SimpleDateFormat("yyyy-mm-dd").format(d1);
         holder.date.setText(cusmdate);
-        if (tb.P1.equals("")) {
+        if (tb.P1.equals("ParameterOne") || tb.P1.equals("ParameterTwo")) {
             holder.tv1.setVisibility(View.INVISIBLE);
             holder.tv2.setVisibility(View.INVISIBLE);
         }
@@ -57,7 +57,7 @@ public class ParticularAilment extends RecyclerView.Adapter<ParticularAilment.Pa
             holder.tv1.setText(tb.P1);
             holder.tv2.setText(table.get(position).P1);
         }
-        if (tb.P2.equals("")) {
+        if (tb.P2.equals("ParameterOne") || tb.P2.equals("ParameterTwo")) {
             holder.tv3.setVisibility(View.INVISIBLE);
             holder.tv4.setVisibility(View.INVISIBLE);
         }

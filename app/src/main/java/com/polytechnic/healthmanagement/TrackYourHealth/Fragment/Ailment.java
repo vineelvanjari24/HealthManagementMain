@@ -58,11 +58,11 @@ public class Ailment extends AppCompatActivity {
                 tv2.setText(tb.P2);
                 v1=addAilmentRecord.findViewById(R.id.tyh_Ailment_value1);
                 v2=addAilmentRecord.findViewById(R.id.tyh_Ailment_value2);
-                if (tb.P1.equals("")){
+                if (tb.P1.equals("ParameterOne") || tb.P1.equals("ParameterTwo")){
                     v1.setVisibility(View.INVISIBLE);
                     tv1.setVisibility(View.INVISIBLE);
                 }
-                if (tb.P2.equals("")){
+                if (tb.P2.equals("ParameterOne") || tb.P2.equals("ParameterTwo")){
                     v2.setVisibility(View.INVISIBLE);
                     tv2.setVisibility(View.INVISIBLE);
                 }
@@ -80,8 +80,15 @@ public class Ailment extends AppCompatActivity {
                     @Override
                     public void onClick(android.view.View v){
                         TYHTable data=new TYHTable();
-                        data.P1=v1.getText().toString();
-                        data.P2=String.valueOf(v2.getText());
+                        if (tb.P1.equals("ParameterOne") || tb.P1.equals("ParameterTwo"))
+                                data.P1="InValid";
+                            else
+                            data.P1=v1.getText().toString();
+
+                        if (tb.P2.equals("ParameterOne") || tb.P2.equals("ParameterTwo"))
+                                data.P2="InValid";
+                            else
+                            data.P2=v2.getText().toString();
                         addAilmentRecord.dismiss();
                         tyhDB db=new tyhDB(getApplicationContext());
                         db.addAilmentRecord(tb,data);

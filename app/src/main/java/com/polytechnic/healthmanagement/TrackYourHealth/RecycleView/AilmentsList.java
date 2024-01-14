@@ -43,7 +43,7 @@ public class AilmentsList extends RecyclerView.Adapter<AilmentsList.AilmentsView
 
     @Override
     public void onBindViewHolder(@NonNull AilmentsViewHolder holder, int position) {
-        holder.tv.setText(tables.get(position).Name);
+        holder.tv.setText(tables.get(position).Name.replaceAll("_"," "));
         holder.cv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
