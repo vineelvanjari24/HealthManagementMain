@@ -12,9 +12,11 @@ import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.polytechnic.healthmanagement.DoctorList.Fragment.DoctorListFragment;
 import com.polytechnic.healthmanagement.R;
 import com.polytechnic.healthmanagement.UserHealth.AddUserHealthActivity;
 import com.polytechnic.healthmanagement.UserHealth.DataBase.UserHealthDB;
@@ -68,6 +70,12 @@ public class UserHealthFragment extends Fragment {
             arrayList = userHealthDB.select();
            UserHealthAdapter adapter1= new UserHealthAdapter(context,arrayList);
            recyclerView.setAdapter(adapter1);
+            FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+            transaction.replace(R.id.frameLayoutDrawable,
+
+                    new DoctorListFragment());
+            transaction.addToBackStack(null);
+            transaction.commit();
         }
     }
 

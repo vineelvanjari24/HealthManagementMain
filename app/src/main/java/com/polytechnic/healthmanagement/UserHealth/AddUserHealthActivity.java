@@ -1,9 +1,13 @@
 package com.polytechnic.healthmanagement.UserHealth;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.telecom.TelecomManager;
@@ -16,6 +20,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.polytechnic.healthmanagement.DoctorList.Fragment.DoctorListFragment;
 import com.polytechnic.healthmanagement.R;
 import com.polytechnic.healthmanagement.UserHealth.DataBase.UserHealthDB;
 
@@ -31,8 +36,6 @@ private  String issueString,descriptionString;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_user_health);
 
-
-
         issueTV=findViewById(R.id.issueUserHealth);
         descriptionTV=findViewById(R.id.descriptionUserHealth);
         Spinner problemRelatedToSpinner = findViewById(R.id.problemRelatedToSpinner);
@@ -40,7 +43,6 @@ private  String issueString,descriptionString;
 
         LinearLayout linearLayout =findViewById(R.id.edit_delete_exit);
         LinearLayout linearLayoutMain =findViewById(R.id.linearLayout);
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarDrawable);
         setSupportActionBar(toolbar);
         if(getSupportActionBar() != null) {
@@ -60,7 +62,6 @@ private  String issueString,descriptionString;
         problemRelatedToArrayList.add("Obstructive");
         ArrayAdapter problemRelatedToAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1,problemRelatedToArrayList);
         problemRelatedToSpinner.setAdapter(problemRelatedToAdapter);
-
 
         if(getIntent().getBooleanExtra("flag",false)){
             linearLayoutMain.removeView(linearLayout);
@@ -87,7 +88,9 @@ private  String issueString,descriptionString;
                         Toast.makeText(this, "Insertion Successful", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent();
                         setResult(RESULT_OK, intent);
-                        finish();                 }
+                        finish();
+
+                    }
                     else
                         Toast.makeText(this, "Insertion Failed", Toast.LENGTH_SHORT).show();
                 }
@@ -117,8 +120,8 @@ private  String issueString,descriptionString;
             issueTV.setClickable(false);
             issueTV.setFocusableInTouchMode(false);
             issueTV.setCursorVisible(false);
-            issueTV.setTextColor(R.color.lightBlack);
-            descriptionTV.setTextColor(R.color.lightBlack);
+            issueTV.setTextColor(getResources().getColor(R.color.lightBlack));
+            descriptionTV.setTextColor(getResources().getColor(R.color.lightBlack));
             descriptionTV.setFocusable(false);
             descriptionTV.setClickable(false);
             descriptionTV.setFocusableInTouchMode(false);
@@ -130,17 +133,34 @@ private  String issueString,descriptionString;
                 issueTV.setClickable(true);
                 issueTV.setFocusableInTouchMode(true);
                 issueTV.setCursorVisible(true);
-                issueTV.setTextColor(R.color.black);
-                descriptionTV.setTextColor(R.color.black);
+                issueTV.setTextColor(getResources().getColor(R.color.black));
+                descriptionTV.setTextColor(getResources().getColor(R.color.black));
                 descriptionTV.setFocusable(true);
                 descriptionTV.setClickable(true);
                 descriptionTV.setFocusableInTouchMode(true);
                 descriptionTV.setCursorVisible(true);
                 problemRelatedToSpinner.setEnabled(true);
-                Toast.makeText(this, "edit", Toast.LENGTH_SHORT).show();
             });
             delete.setOnClickListener(v ->{
-                Toast.makeText(this, "delete", Toast.LENGTH_SHORT).show();
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle("DELETE ADMIN ?");
+                builder.setIcon(R.drawable.delete);
+                builder.setCancelable(false);
+                builder.setMessage("ARE YOU SURE WANT TO DELETE THIS RECORD ??");
+                builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Toast.makeText(AddUserHealthActivity.this, "Delete ", Toast.LENGTH_SHORT).show();
+                       dialogInterface.dismiss();
+                    }
+                });
+                builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+                builder.show();
             });
 
         }
