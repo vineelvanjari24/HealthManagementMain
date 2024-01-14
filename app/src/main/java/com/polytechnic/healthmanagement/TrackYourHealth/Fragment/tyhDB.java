@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
@@ -25,15 +26,17 @@ public class tyhDB extends SQLiteOpenHelper {
         String q;
         q = "CREATE TABLE "+TABLENAME+"(Id Integer PRIMARY KEY AUTOINCREMENT,Ailment text,POne text,PTwo text)";
         db.execSQL(q);
+        q="CREATE TABLE datacopy(ID Integer,ParaOne text,ParaTwo text)";
+        db.execSQL(q);
     }
 
     public void addAilment(TYHTable na){
         SQLiteDatabase db=this.getWritableDatabase();
         ContentValues cv=new ContentValues();
         cv.put("Ailment",na.Name);
-        if(na.P1.trim().equals("") || na.P1.trim()==null)
+        if(na.P1.trim().equals(""))
             na.P1="ParameterOne";
-        if(na.P2.trim().equals("") || na.P2.trim()==null)
+        if(na.P2.trim().equals(""))
             na.P2="ParameterTwo";
         cv.put("POne",na.P1);
         cv.put("PTwo",na.P2);
@@ -56,9 +59,9 @@ public class tyhDB extends SQLiteOpenHelper {
 
     public void addTable(TYHTable table){
         SQLiteDatabase db=this.getWritableDatabase();
-        if(table.P1.trim().equals("") || table.P1.trim() == null)
+        if(table.P1.trim().equals(""))
             table.P1="ParameterOne";
-        if(table.P2.trim().equals("") || table.P1.trim() == null)
+        if(table.P2.trim().equals(""))
             table.P2="ParameterTwo";
         String q="CREATE TABLE "+table.Name+"(Id Integer PRIMARY KEY AUTOINCREMENT,"+table.P1+" text,"+table.P2+" text)";
         db.execSQL(q);
@@ -87,6 +90,63 @@ public class tyhDB extends SQLiteOpenHelper {
             tables.add(t1);
         }
         return tables;
+    }
+
+    public void updateTables(TYHTable tb,String tn){
+        SQLiteDatabase db=this.getWritableDatabase();
+        String q="SELECT Id from "+TABLENAME+" WHERE Ailment=?";
+        Cursor cur=db.rawQuery(q,new String[]{tn});
+        int id=0;
+        while(cur.moveToNext()) {
+            id = cur.getInt(0);
+        }
+        ContentValues cv=new ContentValues();
+        cv.put("Ailment",tb.Name);
+        cv.put("POne",tb.P1);
+        cv.put("PTwo",tb.P2);
+        db.update(TABLENAME,cv,"Id =?",new String[]{String.valueOf(id)});
+        db.delete("datacopy",null,null);
+        db.execSQL("INSERT INTO datacopy SELECT * FROM "+tn);
+        db.execSQL("DROP TABLE IF EXISTS "+tn);
+        addTable(tb);
+        String copyDataQuery = "INSERT INTO "+tb.Name+ " SELECT * FROM datacopy" ;
+        db.execSQL(copyDataQuery);
+    }
+
+    public void updateAilmentRecord(TYHTable tb,TYHTable tv,int Id){
+        SQLiteDatabase db=this.getWritableDatabase();
+        ContentValues cv=new ContentValues();
+        cv.put(tb.P1,tv.P1);
+        cv.put(tb.P2,tv.P2);
+        db.update(tb.Name,cv,"Id =?",new String[]{String.valueOf(Id)});
+    }
+
+    public void deleteAilment(TYHTable tb){
+        SQLiteDatabase db=this.getWritableDatabase();
+        db.delete(TABLENAME,"Ailment=?",new String[]{tb.Name});
+        db.execSQL("DROP TABLE  IF EXISTS "+tb.Name);
+    }
+
+    public int getRecordId(TYHTable tb,int position){
+        int Id=0;
+        SQLiteDatabase db=this.getReadableDatabase();
+        Cursor cur=db.rawQuery("Select * from "+tb.Name,null);
+        ArrayList<TYHTable> tables=new ArrayList<>();
+        while(position>0){
+            cur.moveToNext();
+            position--;
+        }
+        if(cur.moveToNext()){
+            Id=cur.getInt(0);
+        }
+        cur.close();
+        db.close();
+        return Id;
+    }
+
+    public void deleteAilmentRecord(TYHTable t,int Id){
+        SQLiteDatabase db=this.getWritableDatabase();
+        db.delete(t.Name,"Id=?",new String[]{String.valueOf(Id)});
     }
 
     @Override

@@ -7,13 +7,34 @@
     android:elevation="30dp"
     app:cardCornerRadius="20dp"
     android:layout_margin="10dp"
-    android:padding="10dp">
+    android:padding="20dp">
 
-    <TextView
-        android:id="@+id/tyh_ailmentdisplay"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="50dp"
-        />
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:padding="10dp">
+    <TextView
+            android:id="@+id/tyh_ailmentdisplay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="35dp"
+            android:layout_weight="1"
+    />
+
+        <ImageView
+            android:id="@+id/tyh_menu_img"
+            android:layout_width="30dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/vertical_three_dots"
+            />
+    </LinearLayout>
+
+    <!--    <TextView-->
+<!--        android:id="@+id/tyh_ailmentdisplay"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:textSize="50dp"-->
+<!--        />-->
 
 </androidx.cardview.widget.CardView>
