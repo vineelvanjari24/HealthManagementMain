@@ -38,6 +38,7 @@ public class ParticularAilment extends RecyclerView.Adapter<ParticularAilment.Pa
     Context ct;
     public ParticularAilment(Context ct,TYHTable tt)
     {
+
         load(ct,tt);
     }
 

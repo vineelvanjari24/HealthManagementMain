@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
 
                 }
                 else if (id==R.id.doctorList) {
-                    loadFragment(new DoctorListFragment(),false,"DoctorListFragmentTag");
+                    loadFragment(new DoctorListFragment(MainActivity.this),false,"DoctorListFragmentTag");
                 }
                 else if (id==R.id.medicalList) {
                     loadFragment(new MedicalListFragment(),false,"MedicalListFragmentTag");
@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         if(getIntent().getBooleanExtra("flag",false)){
-            loadFragment(new DoctorListFragment(),false,"DoctorListFragmentTag");
+            loadFragment(new DoctorListFragment(MainActivity.this),false,"DoctorListFragmentTag");
         }
 
     }

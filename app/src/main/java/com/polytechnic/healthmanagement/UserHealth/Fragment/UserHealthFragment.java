@@ -69,7 +69,7 @@ public class UserHealthFragment extends Fragment {
             Toast.makeText(context, "hi", Toast.LENGTH_SHORT).show();
             FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
             transaction.replace(R.id.frameLayoutDrawable,
-                    new DoctorListFragment());
+                    new DoctorListFragment(context));
             transaction.addToBackStack(null);
             transaction.commit();
         }

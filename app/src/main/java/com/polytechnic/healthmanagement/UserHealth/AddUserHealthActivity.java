@@ -96,8 +96,8 @@ private  String issueString,descriptionString;
                                 }
                                     Intent intent = new Intent();
                                 setResult(RESULT_OK, intent);
-                                finish();
                                   dialogInterface.dismiss();
+                                  finish();
                             }
                         });
                         builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
@@ -108,7 +108,6 @@ private  String issueString,descriptionString;
                                 }
                                 Intent intent = new Intent();
                                 setResult(2, intent);
-                                finish();
                                 dialogInterface.dismiss();
                                 finish();
                             }
