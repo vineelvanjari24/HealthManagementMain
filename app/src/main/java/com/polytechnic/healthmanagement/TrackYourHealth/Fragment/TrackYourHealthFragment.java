@@ -71,10 +71,11 @@ public class TrackYourHealthFragment extends Fragment {
                 p1=newAilment.findViewById(R.id.tyh_main_p1);
                 p2=newAilment.findViewById(R.id.tyh_main_p2);
                 TYHTable t=new TYHTable();
-                t.Name=ailmentname.getText().toString();
+                t.Name=ailmentname.getText().toString().trim().replaceAll(" ","_");
                 ailmentname.setText("");
-                t.P1=p1.getText().toString();
+                t.P1=p1.getText().toString().trim();
                 p1.setText("");
+                p1.clearFocus();
                 t.P2=p2.getText().toString();
                 p2.setText("");
                 p2.clearFocus();

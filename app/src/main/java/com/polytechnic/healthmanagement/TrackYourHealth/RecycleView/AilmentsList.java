@@ -1,11 +1,21 @@
 package com.polytechnic.healthmanagement.TrackYourHealth.RecycleView;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.appcompat.widget.PopupMenu;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -43,7 +53,13 @@ public class AilmentsList extends RecyclerView.Adapter<AilmentsList.AilmentsView
 
     @Override
     public void onBindViewHolder(@NonNull AilmentsViewHolder holder, int position) {
-        holder.tv.setText(tables.get(position).Name);
+        holder.tv.setText(tables.get(position).Name.replaceAll("_"," "));
+        holder.im.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showMenu(v,tables.get(position));
+            }
+        });
         holder.cv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,11 +80,100 @@ public class AilmentsList extends RecyclerView.Adapter<AilmentsList.AilmentsView
     class AilmentsViewHolder extends RecyclerView.ViewHolder{
         TextView tv;
         CardView cv;
+        ImageView im;
         public AilmentsViewHolder(@NonNull View itemView) {
             super(itemView);
             tv=itemView.findViewById(R.id.tyh_ailmentdisplay);
             cv=itemView.findViewById(R.id.TYH_Ailmentlist_cv);
+            im=itemView.findViewById(R.id.tyh_menu_img);
         }
     }
 
+    public void showMenu(View v,TYHTable tb){
+        PopupMenu popupMenu = new PopupMenu(v.getContext(), v);
+        popupMenu.getMenuInflater().inflate(R.menu.tyh_options, popupMenu.getMenu());
+
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                CharSequence title = item.getTitle();
+                if (title.equals("Edit")) {
+                    Dialog editAilment=new Dialog(v.getContext());
+                    editAilment.setCancelable(false);
+                    editAilment.setContentView(R.layout.tyh_main_dialogbox);
+                    Button dcancel=editAilment.findViewById(R.id.tyh_main_dialog_cancel);
+                    Button dsave=editAilment.findViewById(R.id.tyh_main_dialog_save);
+                    EditText ailmentname=editAilment.findViewById(R.id.tyh_main_title);
+                    EditText p1=editAilment.findViewById(R.id.tyh_main_p1);
+                    EditText p2=editAilment.findViewById(R.id.tyh_main_p2);
+                    ailmentname.setText(tb.Name);
+                    p1.setText(tb.P1);
+                    p2.setText(tb.P2);
+                    if(tb.P1.equals("ParameterOne") || tb.P1.equals("ParameterTwo"))
+                        p1.setVisibility(View.INVISIBLE);
+                    if(tb.P2.equals("ParameterOne") || tb.P2.equals("ParameterTwo"))
+                        p2.setVisibility(View.INVISIBLE);
+                    editAilment.show();
+                    dcancel.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            editAilment.dismiss();
+                        }
+                    });
+
+                    dsave.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            TYHTable th=new TYHTable();
+                            if(ailmentname.getText().toString().trim().equals("")) {
+                                editAilment.dismiss();
+                                Toast.makeText(ct.getApplicationContext(), "Enter a valid Ailment Title", Toast.LENGTH_SHORT).show();
+                            }
+                            else
+                                th.Name= ailmentname.getText().toString().replaceAll(" ","_");
+                            if(p1.getText().toString().trim().equals(""))
+                                th.P1="Invalid";
+                            else
+                                th.P1=p1.getText().toString().trim();
+                            if(p2.getText().toString().trim().equals(""))
+                                th.P2="Invalid";
+                            else
+                                th.P2=p2.getText().toString().trim();
+
+                            tyhDB db=new tyhDB(v.getContext());
+                            db.updateTables(th,tb.Name);
+                            editAilment.dismiss();
+                            load(v.getContext());
+                        }
+
+
+                    });
+
+                        return true;
+                } else if (title.equals("Delete")) {
+                    AlertDialog.Builder confirm=new AlertDialog.Builder(ct);
+                    confirm.setTitle("Delete Confirmation");
+                    confirm.setMessage("Do you want to delete for sure?");
+                    confirm.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                             tyhDB db=new tyhDB(v.getContext());
+                             db.deleteAilment(tb);
+                             load(v.getContext());
+                        }
+                    });
+                    confirm.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Toast.makeText(v.getContext(), "Delete Canceled",Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    confirm.show();
+                    return true;
+                }
+                    return true;
+            }
+        });
+        popupMenu.show();
+    }
 }
