@@ -57,8 +57,8 @@ public class UserHealthFragment extends Fragment {
             Intent intent =new Intent(context, AddUserHealthActivity.class);
             intent.putExtra("flag",true);
             startActivityForResult(intent, ADD_ITEM_REQUEST);
-
         });
+
         return  view;
     }
     @Override
@@ -67,16 +67,15 @@ public class UserHealthFragment extends Fragment {
 
         if (requestCode == ADD_ITEM_REQUEST && resultCode == RESULT_OK) {
             Toast.makeText(context, "hi", Toast.LENGTH_SHORT).show();
-            arrayList = userHealthDB.select();
-           UserHealthAdapter adapter1= new UserHealthAdapter(context,arrayList);
-           recyclerView.setAdapter(adapter1);
             FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
             transaction.replace(R.id.frameLayoutDrawable,
-
                     new DoctorListFragment());
             transaction.addToBackStack(null);
             transaction.commit();
         }
+        arrayList = userHealthDB.select();
+        UserHealthAdapter adapter1= new UserHealthAdapter(context,arrayList);
+        recyclerView.setAdapter(adapter1);
     }
 
 }
