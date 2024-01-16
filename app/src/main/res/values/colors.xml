@@ -4,5 +4,8 @@
     <color name="white">#FFFFFFFF</color>
     <color name="orange">#FF9800</color>
     <color name="lightBlack">#494949</color>
+    <color name="darkblue">#005B85</color>
+    <color name="lightblue">#00D0FF</color>
+    <color name="moderateblue">#01A5CA</color>
 
 </resources>

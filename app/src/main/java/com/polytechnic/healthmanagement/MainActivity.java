@@ -11,7 +11,11 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -21,6 +25,7 @@ import com.polytechnic.healthmanagement.Expenses.Fragment.ExpensesFragment;
 import com.polytechnic.healthmanagement.MedicalList.Fragment.MedicalListFragment;
 import com.polytechnic.healthmanagement.DoctorList.Fragment.DoctorListFragment;
 import com.polytechnic.healthmanagement.UserHealth.Fragment.UserHealthFragment;
+import com.polytechnic.healthmanagement.UserLogin.Login;
 import com.polytechnic.healthmanagement.VisitExperience.Fragment.VisitExperienceFragment;
 
 
@@ -37,6 +42,9 @@ public class MainActivity extends AppCompatActivity {
         toolbar =findViewById(R.id.toolbarDrawable);
 
         setSupportActionBar(toolbar);
+        if(getSupportActionBar()!=null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
         ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.open_drawable,R.string.close_drawable);
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
@@ -96,5 +104,27 @@ public class MainActivity extends AppCompatActivity {
         else
             fragmentTransaction.replace(R.id.frameLayoutDrawable,fragment,tag);
         fragmentTransaction.commit();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        new MenuInflater(this).inflate(R.menu.exit_option,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId()==R.id.exit){
+            SharedPreferences login = getSharedPreferences("login",MODE_PRIVATE);
+            SharedPreferences.Editor edit = login.edit();
+            edit.putBoolean("user",false);
+            edit.putBoolean("admin",false);
+            edit.apply();
+            Intent intent = new Intent(this, Login.class);
+            intent.putExtra("flag",true);
+            startActivity(intent);
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
