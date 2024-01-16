@@ -97,7 +97,7 @@ public class AilmentsList extends RecyclerView.Adapter<AilmentsList.AilmentsView
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 CharSequence title = item.getTitle();
-                if (title.equals("Edit")) {
+                if (title.equals("Edit")){
                     Dialog editAilment=new Dialog(v.getContext());
                     editAilment.setCancelable(false);
                     editAilment.setContentView(R.layout.tyh_main_dialogbox);
@@ -106,13 +106,19 @@ public class AilmentsList extends RecyclerView.Adapter<AilmentsList.AilmentsView
                     EditText ailmentname=editAilment.findViewById(R.id.tyh_main_title);
                     EditText p1=editAilment.findViewById(R.id.tyh_main_p1);
                     EditText p2=editAilment.findViewById(R.id.tyh_main_p2);
-                    ailmentname.setText(tb.Name);
-                    p1.setText(tb.P1);
-                    p2.setText(tb.P2);
-                    if(tb.P1.equals("ParameterOne") || tb.P1.equals("ParameterTwo"))
-                        p1.setVisibility(View.INVISIBLE);
-                    if(tb.P2.equals("ParameterOne") || tb.P2.equals("ParameterTwo"))
-                        p2.setVisibility(View.INVISIBLE);
+                    TextView tv1=editAilment.findViewById(R.id.tyh_main_dialog_text1);
+                    TextView tv2=editAilment.findViewById(R.id.tyh_main_dialog_text2);
+                    ailmentname.setText(tb.Name.replaceAll("_"," "));
+                    p1.setText(tb.P1.replaceAll("_"," "));
+                    p2.setText(tb.P2.replaceAll("_"," "));
+                    if(tb.P1.equals("ParameterOne") || tb.P1.equals("ParameterTwo")) {
+                        p1.setVisibility(View.GONE);
+                        tv1.setVisibility(View.GONE);
+                    }
+                    if(tb.P2.equals("ParameterOne") || tb.P2.equals("ParameterTwo")) {
+                        p2.setVisibility(View.GONE);
+                        tv2.setVisibility(View.GONE);
+                    }
                     editAilment.show();
                     dcancel.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -134,19 +140,16 @@ public class AilmentsList extends RecyclerView.Adapter<AilmentsList.AilmentsView
                             if(p1.getText().toString().trim().equals(""))
                                 th.P1="Invalid";
                             else
-                                th.P1=p1.getText().toString().trim();
+                                th.P1=p1.getText().toString().trim().replaceAll(" ","_");
                             if(p2.getText().toString().trim().equals(""))
                                 th.P2="Invalid";
                             else
-                                th.P2=p2.getText().toString().trim();
-
+                                th.P2=p2.getText().toString().trim().replaceAll(" ","_");
                             tyhDB db=new tyhDB(v.getContext());
                             db.updateTables(th,tb.Name);
                             editAilment.dismiss();
                             load(v.getContext());
                         }
-
-
                     });
 
                         return true;

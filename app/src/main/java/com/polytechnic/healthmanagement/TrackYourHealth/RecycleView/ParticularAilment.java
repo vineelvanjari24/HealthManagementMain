@@ -71,19 +71,19 @@ public class ParticularAilment extends RecyclerView.Adapter<ParticularAilment.Pa
         });
         holder.date.setText(cusmdate);
         if (tb.P1.equals("ParameterOne") || tb.P1.equals("ParameterTwo")) {
-            holder.tv1.setVisibility(View.INVISIBLE);
-            holder.tv2.setVisibility(View.INVISIBLE);
+            holder.tv1.setVisibility(View.GONE);
+            holder.tv2.setVisibility(View.GONE);
         }
         else {
-            holder.tv1.setText(tb.P1);
+            holder.tv1.setText(tb.P1.replaceAll("_"," "));
             holder.tv2.setText(table.get(position).P1);
         }
         if (tb.P2.equals("ParameterOne") || tb.P2.equals("ParameterTwo")) {
-            holder.tv3.setVisibility(View.INVISIBLE);
-            holder.tv4.setVisibility(View.INVISIBLE);
+            holder.tv3.setVisibility(View.GONE);
+            holder.tv4.setVisibility(View.GONE);
         }
         else {
-            holder.tv3.setText(tb.P2);
+            holder.tv3.setText(tb.P2.replaceAll("_"," "));
             holder.tv4.setText(table.get(position).P2);
         }
 
@@ -122,17 +122,22 @@ public class ParticularAilment extends RecyclerView.Adapter<ParticularAilment.Pa
                     TextView p2 = editAilmentRecord.findViewById(R.id.tyh_ailment_text2);
                     EditText e1 = editAilmentRecord.findViewById(R.id.tyh_Ailment_value1);
                     EditText e2 = editAilmentRecord.findViewById(R.id.tyh_Ailment_value2);
-                    p1.setText(tb.P1);
-                    p2.setText(tb.P2);
+                    p1.setText(tb.P1.replaceAll("_"," "));
+                    p2.setText(tb.P2.replaceAll("_"," "));
                     e1.setText(tv.P1);
                     e2.setText(tv.P2);
                     if (tb.P1.equals("ParameterOne") || tb.P1.equals("ParameterTwo")) {
-                        p1.setVisibility(View.INVISIBLE);
-                        e1.setVisibility(View.INVISIBLE);
+//                        p1.setVisibility(View.INVISIBLE);
+//                        e1.setVisibility(View.INVISIBLE);
+                        p1.setVisibility(View.GONE);
+                        e1.setVisibility(View.GONE);
                     }
                     if (tb.P2.equals("ParameterOne") || tb.P2.equals("ParameterTwo")){
-                        p2.setVisibility(View.INVISIBLE);
-                        e2.setVisibility(View.INVISIBLE);
+//                        p2.setVisibility(View.INVISIBLE);
+//                        e2.setVisibility(View.INVISIBLE);
+                        p2.setVisibility(View.GONE);
+                        e2.setVisibility(View.GONE);
+
                     }
                     editAilmentRecord.show();
                     dcancel.setOnClickListener(new View.OnClickListener() {
