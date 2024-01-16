@@ -1,4 +1,4 @@
-package com.polytechnic.healthmanagement.UserHealth.RecycleView;
+package com.polytechnic.healthmanagement.DoctorList.RecycleView;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -7,14 +7,11 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,57 +19,54 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.textfield.TextInputLayout;
+import com.polytechnic.healthmanagement.DoctorList.DoctorDB;
+import com.polytechnic.healthmanagement.DoctorList.Model.DoctorModel;
 import com.polytechnic.healthmanagement.MainActivity;
 import com.polytechnic.healthmanagement.R;
-import com.polytechnic.healthmanagement.UserHealth.AddUserHealthActivity;
 import com.polytechnic.healthmanagement.UserHealth.DataBase.UserHealthDB;
 import com.polytechnic.healthmanagement.UserHealth.Model.UserHealthModel;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.zip.Inflater;
 
-public class UserHealthAdapter extends RecyclerView.Adapter<UserHealthAdapter.ViewHolder> {
+public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.ViewHolder> {
     Context context;
-    ArrayList<UserHealthModel> arrayList;
-    public UserHealthAdapter(Context context, ArrayList<UserHealthModel> arrayList){
+    ArrayList<DoctorModel> arrayList;
+    public DoctorAdapter(Context context){
         this.context = context;
-        this.arrayList=arrayList;
+        DoctorDB doctorDB = new DoctorDB(context);
+        arrayList=doctorDB.select();
     }
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.user_health_recycle_view_design,parent,false);
+        View view = LayoutInflater.from(context).inflate(R.layout.doctor_recycle_view_design,parent,false);
 
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.issueTV.setText(arrayList.get(position).issue);
+        holder.doctorNameTV.setText(arrayList.get(position).name);
         holder.descriptionTV.setText(arrayList.get(position).description);
-        holder.createdDateTV.setText(arrayList.get(position).createdDate);
-        holder.editedDateTV.setText(arrayList.get(position).editedDate);
-        holder.cardView.setOnClickListener(v ->{
-            {
+
+       /* holder.cardView.setOnClickListener(v ->{
+      *//*      {
                 Dialog dialog = new Dialog(context,R.style.Dialogbox_border);
                 dialog.setContentView(R.layout.activity_add_user_health);
-                /*Window window = dialog.getWindow();
+                *//**//*Window window = dialog.getWindow();
                 window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
-*/
+*//**//*
                 LinearLayout linearLayout = dialog.findViewById(R.id.linearLayout);
                 LinearLayout toolbar = dialog.findViewById(R.id.toolbar);
                 linearLayout.removeView(toolbar);
                 UserHealthDB userHealthDB = new UserHealthDB(context);
                 EditText issueET, descriptionET;
-                TextView issueTV, descriptionTV;
+                TextView doctorNameTV, descriptionTV;
                 TextInputLayout issueTextInputLayout, descriptionTextInputLayout;
                 String issueString, descriptionString;
                 ImageView edit, delete, cancel;
@@ -85,7 +79,7 @@ public class UserHealthAdapter extends RecyclerView.Adapter<UserHealthAdapter.Vi
                 Button add=dialog.findViewById(R.id.add);
                 issueTextInputLayout = dialog.findViewById(R.id.issueTextInputLayout);
                 descriptionTextInputLayout = dialog.findViewById(R.id.descriptionTextInputLayout);
-                issueTV = dialog.findViewById(R.id.issueUserHealthTV);
+                doctorNameTV = dialog.findViewById(R.id.issueUserHealthTV);
                 descriptionTV = dialog.findViewById(R.id.descriptionUserHealthTV);
 
                 ArrayList<String> problemRelatedToArrayList = new ArrayList<>();
@@ -102,7 +96,7 @@ public class UserHealthAdapter extends RecyclerView.Adapter<UserHealthAdapter.Vi
                 ArrayAdapter problemRelatedToAdapter = new ArrayAdapter(context, android.R.layout.simple_list_item_1,problemRelatedToArrayList);
                 problemRelatedToSpinner.setAdapter(problemRelatedToAdapter);
 
-               issueTV.setText("Issue");
+               doctorNameTV.setText("Issue");
                 issueTextInputLayout.setHint("Issue");
                 descriptionTV.setText("Description");
                 descriptionTextInputLayout.setHint("Description");
@@ -124,9 +118,9 @@ public class UserHealthAdapter extends RecyclerView.Adapter<UserHealthAdapter.Vi
                 issueET.setClickable(false);
                 issueET.setFocusableInTouchMode(false);
                 issueET.setCursorVisible(false);
-              /*  issueET.setTextColor(getResources().getColor(R.color.lightBlack));
+              *//**//*  issueET.setTextColor(getResources().getColor(R.color.lightBlack));
                 descriptionET.setTextColor(getResources().getColor(R.color.lightBlack));
-              */  descriptionET.setFocusable(false);
+              *//**//*  descriptionET.setFocusable(false);
                 descriptionET.setClickable(false);
                 descriptionET.setFocusableInTouchMode(false);
                 descriptionET.setCursorVisible(false);
@@ -158,14 +152,14 @@ public class UserHealthAdapter extends RecyclerView.Adapter<UserHealthAdapter.Vi
                     issueET.setClickable(true);
                     issueET.setFocusableInTouchMode(true);
                     issueET.setCursorVisible(true);
-                 /*   issueET.setTextColor(getResources().getColor(R.color.black));
+                 *//**//*   issueET.setTextColor(getResources().getColor(R.color.black));
                     descriptionET.setTextColor(getResources().getColor(R.color.black));
-                 */   descriptionET.setFocusable(true);
+                 *//**//*   descriptionET.setFocusable(true);
                     descriptionET.setClickable(true);
                     descriptionET.setFocusableInTouchMode(true);
                     descriptionET.setCursorVisible(true);
                     problemRelatedToSpinner.setEnabled(true);
-                    issueTV.setText("Enter Issue");
+                    doctorNameTV.setText("Enter Issue");
                     descriptionTV.setText("Enter Description");
                     issueET.setHint("Enter Issue");
                     descriptionET.setHint("Enter Description");
@@ -196,14 +190,14 @@ public class UserHealthAdapter extends RecyclerView.Adapter<UserHealthAdapter.Vi
                                 issueET.setClickable(false);
                                 issueET.setFocusableInTouchMode(false);
                                 issueET.setCursorVisible(false);
-                        /*    issueET.setTextColor(getResources().getColor(R.color.lightBlack));
+                        *//**//*    issueET.setTextColor(getResources().getColor(R.color.lightBlack));
                             descriptionET.setTextColor(getResources().getColor(R.color.lightBlack));
-                        */    descriptionET.setFocusable(false);
+                        *//**//*    descriptionET.setFocusable(false);
                                 descriptionET.setClickable(false);
                                 descriptionET.setFocusableInTouchMode(false);
                                 descriptionET.setCursorVisible(false);
                                 problemRelatedToSpinner.setEnabled(false);
-                                issueTV.setText("Issue");
+                                doctorNameTV.setText("Issue");
                                 issueTextInputLayout.setHint("Issue");
                                 descriptionTV.setText("Description");
                                 descriptionTextInputLayout.setHint("Description");
@@ -242,17 +236,17 @@ public class UserHealthAdapter extends RecyclerView.Adapter<UserHealthAdapter.Vi
                     dialog.dismiss();
                 });
                 dialog.show();
-            }
-           /* Intent intent = new Intent(context, AddUserHealthActivity.class);
+            }*//*
+           *//* Intent intent = new Intent(context, AddUserHealthActivity.class);
             intent.getBooleanExtra("flag",false);
             intent.putExtra("issue",arrayList.get(position).issue);
             intent.putExtra("description",arrayList.get(position).description);
             intent.putExtra("spinner",arrayList.get(position).problemRelatedTo);
             intent.putExtra("id",arrayList.get(position).id);
             intent.putExtra("createdDate",arrayList.get(position).createdDate);
-            context.startActivity(intent);*/
+            context.startActivity(intent);*//*
 
-        });
+        });*/
     }
 
 
@@ -262,15 +256,13 @@ public class UserHealthAdapter extends RecyclerView.Adapter<UserHealthAdapter.Vi
         return arrayList.size();
     }
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView issueTV,descriptionTV,createdDateTV,editedDateTV;
+        TextView doctorNameTV,descriptionTV;
         CardView cardView;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            issueTV=itemView.findViewById(R.id.issueUserHealth);
-            descriptionTV=itemView.findViewById(R.id.descriptionUserHealth);
-            createdDateTV=itemView.findViewById(R.id.createdDateUserHealth);
-            editedDateTV=itemView.findViewById(R.id.editedDateUserHealth);
-            cardView=itemView.findViewById(R.id.userHealthCardView);
+            doctorNameTV=itemView.findViewById(R.id.doctorName);
+            descriptionTV=itemView.findViewById(R.id.doctorDescription);
+            cardView=itemView.findViewById(R.id.doctorListCardview);
         }
     }
 }

@@ -12,9 +12,11 @@ import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.polytechnic.healthmanagement.DoctorList.Fragment.DoctorListFragment;
 import com.polytechnic.healthmanagement.R;
 import com.polytechnic.healthmanagement.UserHealth.AddUserHealthActivity;
 import com.polytechnic.healthmanagement.UserHealth.DataBase.UserHealthDB;
@@ -53,9 +55,10 @@ public class UserHealthFragment extends Fragment {
         }
         view.findViewById(R.id.addUserHealth).setOnClickListener(v ->{
             Intent intent =new Intent(context, AddUserHealthActivity.class);
+            intent.putExtra("flag",true);
             startActivityForResult(intent, ADD_ITEM_REQUEST);
-
         });
+
         return  view;
     }
     @Override
@@ -64,10 +67,15 @@ public class UserHealthFragment extends Fragment {
 
         if (requestCode == ADD_ITEM_REQUEST && resultCode == RESULT_OK) {
             Toast.makeText(context, "hi", Toast.LENGTH_SHORT).show();
-            arrayList = userHealthDB.select();
-           UserHealthAdapter adapter1= new UserHealthAdapter(context,arrayList);
-           recyclerView.setAdapter(adapter1);
+            FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+            transaction.replace(R.id.frameLayoutDrawable,
+                    new DoctorListFragment(context));
+            transaction.addToBackStack(null);
+            transaction.commit();
         }
+        arrayList = userHealthDB.select();
+        UserHealthAdapter adapter1= new UserHealthAdapter(context,arrayList);
+        recyclerView.setAdapter(adapter1);
     }
 
 }

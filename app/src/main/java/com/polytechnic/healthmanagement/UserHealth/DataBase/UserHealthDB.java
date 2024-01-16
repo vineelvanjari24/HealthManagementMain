@@ -84,6 +84,13 @@ public class UserHealthDB extends SQLiteOpenHelper {
 
         return arrayList;
     }
+    public  boolean deleteRecord(int id){
+       int flag= dbw.delete(TABLE_NAME,"id="+id,null);
+       if(flag==1)
+           return true;
+       else
+           return false;
+    }
 
 }
 
