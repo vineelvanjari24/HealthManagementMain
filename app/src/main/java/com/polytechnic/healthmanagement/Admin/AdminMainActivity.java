@@ -3,6 +3,7 @@ package com.polytechnic.healthmanagement.Admin;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import com.google.android.material.tabs.TabLayout;
 import com.polytechnic.healthmanagement.R;
 import com.polytechnic.healthmanagement.UserLogin.Login;
 
@@ -22,7 +24,11 @@ public class AdminMainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_main);
         toolbar =findViewById(R.id.toolbarDrawable);
-
+        TabLayout tabLayout = findViewById(R.id.tabLayout);
+        ViewPager viewPager = findViewById(R.id.viewPager);
+        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(),this);
+        viewPager.setAdapter(viewPagerAdapter) ;
+        tabLayout.setupWithViewPager(viewPager);
         setSupportActionBar(toolbar);
         if(getSupportActionBar()!=null){
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
