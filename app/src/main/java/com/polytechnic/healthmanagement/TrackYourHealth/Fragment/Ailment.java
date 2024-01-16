@@ -54,17 +54,17 @@ public class Ailment extends AppCompatActivity {
                 addAilmentRecord.setCancelable(false);
                 tv1=addAilmentRecord.findViewById(R.id.tyh_ailment_text1);
                 tv2=addAilmentRecord.findViewById(R.id.tyh_ailment_text2);
-                tv1.setText(tb.P1);
-                tv2.setText(tb.P2);
+                tv1.setText(tb.P1.replaceAll("_"," "));
+                tv2.setText(tb.P2.replaceAll("_"," "));
                 v1=addAilmentRecord.findViewById(R.id.tyh_Ailment_value1);
                 v2=addAilmentRecord.findViewById(R.id.tyh_Ailment_value2);
                 if (tb.P1.equals("ParameterOne") || tb.P1.equals("ParameterTwo")){
-                    v1.setVisibility(View.INVISIBLE);
-                    tv1.setVisibility(View.INVISIBLE);
+                    v1.setVisibility(View.GONE);
+                    tv1.setVisibility(View.GONE);
                 }
                 if (tb.P2.equals("ParameterOne") || tb.P2.equals("ParameterTwo")){
-                    v2.setVisibility(View.INVISIBLE);
-                    tv2.setVisibility(View.INVISIBLE);
+                    v2.setVisibility(View.GONE);
+                    tv2.setVisibility(View.GONE);
                 }
                 dcancel=addAilmentRecord.findViewById(R.id.tyh_Ailment_Dialog_cancel);
                 dsave=addAilmentRecord.findViewById(R.id.tyh_Ailment_Dialog_save);

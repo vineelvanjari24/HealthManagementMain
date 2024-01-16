@@ -12,46 +12,57 @@
         android:textSize="24sp"
         />
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Ailment Name">
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="24sp"
-        android:hint="Enter Ailment"
+
         android:id="@+id/tyh_main_title"
-
         />
-
+    </com.google.android.material.textfield.TextInputLayout>
     <TextView
+        android:id="@+id/tyh_main_dialog_text1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Enter Parameter -1 Name : "
 
         android:textSize="24sp"
         />
-
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Ex: Systolic Pressure(for BP)">
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="24sp"
-        android:hint="Ex: Systolic Pressure(for BP)"
         android:id="@+id/tyh_main_p1"
         />
-
+    </com.google.android.material.textfield.TextInputLayout>
     <TextView
+        android:id="@+id/tyh_main_dialog_text2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Enter Parameter - 2 Name : "
-
         android:textSize="24sp"
         />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Ex: Diastolic Pressure(for BP)">
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="24sp"
-        android:hint="Ex: Diastolic Pressure(for BP)"
         android:id="@+id/tyh_main_p2"
         />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"

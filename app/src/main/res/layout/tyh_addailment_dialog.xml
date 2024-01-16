@@ -13,15 +13,17 @@
         android:id="@+id/tyh_ailment_text1"
         />
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Value">
     <EditText
-        android:hint="Enter Value"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="24sp"
         android:id="@+id/tyh_Ailment_value1"
-
         />
-
+    </com.google.android.material.textfield.TextInputLayout>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -29,16 +31,17 @@
         android:id="@+id/tyh_ailment_text2"
         android:text=""
         />
-
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Value">
     <EditText
-        android:hint="Enter Value"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="24sp"
-
         android:id="@+id/tyh_Ailment_value2"
         />
-
+    </com.google.android.material.textfield.TextInputLayout>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

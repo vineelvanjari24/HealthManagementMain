@@ -66,24 +66,30 @@ public class TrackYourHealthFragment extends Fragment {
         dsave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(android.view.View v) {
-                newAilment.dismiss();
                 ailmentname=newAilment.findViewById(R.id.tyh_main_title);
                 p1=newAilment.findViewById(R.id.tyh_main_p1);
                 p2=newAilment.findViewById(R.id.tyh_main_p2);
                 TYHTable t=new TYHTable();
                 t.Name=ailmentname.getText().toString().trim().replaceAll(" ","_");
-                ailmentname.setText("");
-                t.P1=p1.getText().toString().trim();
-                p1.setText("");
-                p1.clearFocus();
-                t.P2=p2.getText().toString();
-                p2.setText("");
-                p2.clearFocus();
-                tyhDB db=new tyhDB(getContext());
-                db.addAilment(t);
-                db.addTable(t);
-                Toast.makeText(getContext(), "Ailment Saved", Toast.LENGTH_SHORT).show();
-                a.load(getContext());
+                if(ailmentname.getText().toString().trim().equals("")){
+                    newAilment.dismiss();
+                    Toast.makeText(getContext(), "Ailment Name is Must", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    ailmentname.setText("");
+                    t.P1 = p1.getText().toString().trim().replaceAll(" ", "_");
+                    p1.setText("");
+                    p1.clearFocus();
+                    t.P2 = p2.getText().toString().trim().replaceAll(" ", "_");
+                    p2.setText("");
+                    p2.clearFocus();
+                    newAilment.dismiss();
+                    tyhDB db = new tyhDB(getContext());
+                    db.addAilment(t);
+                    db.addTable(t);
+                    Toast.makeText(getContext(), "Ailment Saved", Toast.LENGTH_SHORT).show();
+                    a.load(getContext());
+                }
             }
         });
         return View;
