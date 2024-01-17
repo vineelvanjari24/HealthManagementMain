@@ -3,14 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:id="@+id/relativeLayout"
+    >
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/doctorListRecycleView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         />
-    <!--<androidx.cardview.widget.CardView
+    <androidx.cardview.widget.CardView
         android:id="@+id/addDoctorList"
         android:layout_width="@dimen/_40sdp"
         android:layout_height="@dimen/_40sdp"
@@ -31,5 +33,5 @@
             android:layout_height="match_parent"
             android:padding="@dimen/_5sdp"
             android:src="@drawable/add" />
-    </androidx.cardview.widget.CardView>-->
+    </androidx.cardview.widget.CardView>
 </RelativeLayout>

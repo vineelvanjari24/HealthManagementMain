@@ -23,7 +23,7 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         if(position==0)
         {
-            return  new DoctorListFragment(context);
+            return  new DoctorListFragment(context,"fromAdmin");
         }else {
             return  new MedicalListFragment(context);
         }

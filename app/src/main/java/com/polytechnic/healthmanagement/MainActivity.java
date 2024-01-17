@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
                 }
                 else if (id==R.id.doctorList) {
-                    loadFragment(new DoctorListFragment(MainActivity.this),false,"DoctorListFragmentTag");
+                    loadFragment(new DoctorListFragment(MainActivity.this,"fromMainActivity"),false,"DoctorListFragmentTag");
                 }
                 else if (id==R.id.medicalList) {
                     loadFragment(new MedicalListFragment(),false,"MedicalListFragmentTag");
@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         if(getIntent().getBooleanExtra("flag",false)){
-            loadFragment(new DoctorListFragment(MainActivity.this),false,"DoctorListFragmentTag");
+            loadFragment(new DoctorListFragment(MainActivity.this,"fromUser"),false,"DoctorListFragmentTag");
         }
 
     }

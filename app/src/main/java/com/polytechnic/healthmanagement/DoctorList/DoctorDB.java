@@ -24,6 +24,7 @@ public class DoctorDB extends SQLiteOpenHelper
 
     private  static  String EXPERIENCE="Experience";
     private  static  String WORKING_IN="WorkingIn";
+    private  static  String PROBLEM_RELATED_TO="ProblemRelatedTo";
     private   SQLiteDatabase dbr=this.getReadableDatabase();
     private SQLiteDatabase dbw=this.getWritableDatabase();
     public DoctorDB(@Nullable Context context) {
@@ -32,7 +33,7 @@ public class DoctorDB extends SQLiteOpenHelper
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table "+TABLE_NAME+" (" +ID+ " integer primary key autoincrement ,"  +NAME+ " text ,"+DESCRIPTION +" text ,"+SPECIALIST+" text ,"+ EXPERIENCE+" text , "+WORKING_IN+" text "+ ")");
+        db.execSQL("create table "+TABLE_NAME+" (" +ID+ " integer primary key autoincrement ,"  +NAME+ " text ,"+DESCRIPTION +" text ,"+SPECIALIST+" text ,"+ EXPERIENCE+" text , "+WORKING_IN+" text ,"+ PROBLEM_RELATED_TO+ " text" +")");
 
     }
 
@@ -41,13 +42,14 @@ public class DoctorDB extends SQLiteOpenHelper
         db.execSQL("DROP TABLE IF EXISTS "+TABLE_NAME);
         onCreate(db);
     }
-    public boolean insert(String name,String description,String specialist,String experience , String workingIn){
+    public boolean insert(String name,String description,String specialist,String experience , String workingIn,String problemRelatedTo){
         ContentValues cv = new ContentValues();
         cv.put(NAME,name);
         cv.put(DESCRIPTION,description);
         cv.put(SPECIALIST,specialist);
         cv.put(EXPERIENCE,experience);
         cv.put(WORKING_IN,workingIn);
+        cv.put(PROBLEM_RELATED_TO,problemRelatedTo);
         float flag= dbw.insert(TABLE_NAME,null,cv);
         if(flag>0)
             return true;
@@ -66,11 +68,11 @@ public class DoctorDB extends SQLiteOpenHelper
                 String specialist=cursor.getString(3);
                 String experience=cursor.getString(4);
                 String workingIn=cursor.getString(5);
-                DoctorModel doctorModel = new DoctorModel(id,name,description,specialist,experience,workingIn);
+                String problemRelatedTo=cursor.getString(5);
+                DoctorModel doctorModel = new DoctorModel(id,name,description,specialist,experience,workingIn,problemRelatedTo);
                 arrayList.add(doctorModel);
             }while (cursor.moveToNext());
         }
-
         return arrayList;
     }
 }

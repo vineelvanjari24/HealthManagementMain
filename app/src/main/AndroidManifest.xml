@@ -28,7 +28,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".DoctorList.DoctorDetailsActivity"
+            android:name=".DoctorList.DoctorActivity"
             android:exported="false" />
         <activity
             android:name=".TrackYourHealth.Fragment.Ailment"

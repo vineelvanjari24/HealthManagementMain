@@ -66,10 +66,9 @@ public class UserHealthFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == ADD_ITEM_REQUEST && resultCode == RESULT_OK) {
-            Toast.makeText(context, "hi", Toast.LENGTH_SHORT).show();
             FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
             transaction.replace(R.id.frameLayoutDrawable,
-                    new DoctorListFragment(context));
+                    new DoctorListFragment(context,"fromUser"));
             transaction.addToBackStack(null);
             transaction.commit();
         }
