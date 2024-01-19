@@ -51,18 +51,8 @@ private  String issueString,descriptionString;
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-        ArrayList<String> problemRelatedToArrayList = new ArrayList<>();
-        problemRelatedToArrayList.add("Malaria");
-        problemRelatedToArrayList.add("Tuberculosis");
-        problemRelatedToArrayList.add("Diabetes");
-        problemRelatedToArrayList.add("Hypertension");
-        problemRelatedToArrayList.add("Dengue Fever");
-        problemRelatedToArrayList.add("Heart Disease");
-        problemRelatedToArrayList.add("Stroke");
-        problemRelatedToArrayList.add("Hepatitis");
-        problemRelatedToArrayList.add("Typhoid Fever");
-        problemRelatedToArrayList.add("Obstructive");
-        ArrayAdapter problemRelatedToAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1,problemRelatedToArrayList);
+
+        ArrayAdapter problemRelatedToAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1,AddUserHealthActivity.probleRelatedToArrayList());
         problemRelatedToSpinner.setAdapter(problemRelatedToAdapter);
 
         UserHealthDB userHealthDB = new UserHealthDB(this);
@@ -84,9 +74,7 @@ private  String issueString,descriptionString;
                     String formattedDateTime = dateFormat.format(currentDate);
                     String date = formattedDateTime.substring(0, 8);
                     String time = formattedDateTime.substring(9);
-                        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                        builder.setTitle("DELETE ADMIN ?");
-                        builder.setIcon(R.drawable.delete);
+                        AlertDialog.Builder builder = new AlertDialog.Builder(this,R.style.Dialogbox_border);
                         builder.setMessage("DO YOU WANT TO RECOMMEND DOCTOR ??");
                         builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                             @Override
@@ -134,5 +122,19 @@ private  String issueString,descriptionString;
     public void onBackPressed() {
 
         super.onBackPressed();
+    }
+    public static  ArrayList probleRelatedToArrayList(){
+        ArrayList<String> problemRelatedToArrayList = new ArrayList<>();
+        problemRelatedToArrayList.add("Malaria");
+        problemRelatedToArrayList.add("Tuberculosis");
+        problemRelatedToArrayList.add("Diabetes");
+        problemRelatedToArrayList.add("Hypertension");
+        problemRelatedToArrayList.add("Dengue Fever");
+        problemRelatedToArrayList.add("Heart Disease");
+        problemRelatedToArrayList.add("Stroke");
+        problemRelatedToArrayList.add("Hepatitis");
+        problemRelatedToArrayList.add("Typhoid Fever");
+        problemRelatedToArrayList.add("Obstructive");
+        return problemRelatedToArrayList;
     }
 }

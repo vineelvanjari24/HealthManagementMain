@@ -88,17 +88,7 @@ public class UserHealthAdapter extends RecyclerView.Adapter<UserHealthAdapter.Vi
                 issueTV = dialog.findViewById(R.id.issueUserHealthTV);
                 descriptionTV = dialog.findViewById(R.id.descriptionUserHealthTV);
 
-                ArrayList<String> problemRelatedToArrayList = new ArrayList<>();
-                problemRelatedToArrayList.add("Malaria");
-                problemRelatedToArrayList.add("Tuberculosis");
-                problemRelatedToArrayList.add("Diabetes");
-                problemRelatedToArrayList.add("Hypertension");
-                problemRelatedToArrayList.add("Dengue Fever");
-                problemRelatedToArrayList.add("Heart Disease");
-                problemRelatedToArrayList.add("Stroke");
-                problemRelatedToArrayList.add("Hepatitis");
-                problemRelatedToArrayList.add("Typhoid Fever");
-                problemRelatedToArrayList.add("Obstructive");
+                ArrayList<String> problemRelatedToArrayList =AddUserHealthActivity.probleRelatedToArrayList();
                 ArrayAdapter problemRelatedToAdapter = new ArrayAdapter(context, android.R.layout.simple_list_item_1,problemRelatedToArrayList);
                 problemRelatedToSpinner.setAdapter(problemRelatedToAdapter);
 

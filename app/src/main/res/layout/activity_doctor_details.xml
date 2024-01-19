@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DoctorList.DoctorDetailsActivity"
+    tools:context=".DoctorList.DoctorActivity"
     >
     <LinearLayout
         android:layout_width="match_parent"
@@ -29,75 +29,124 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/_10sdp"
-            android:columnCount="3">
+            android:columnCount="2">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="NAME"
+                android:layout_margin="@dimen/_5sdp"
                 android:textAllCaps="true"
                 android:textSize="@dimen/_14sdp" />
-            <TextView
-                android:layout_width="@dimen/_20sdp"
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="@dimen/_140sdp"
+                android:layout_margin="@dimen/_5sdp"
                 android:layout_height="wrap_content"
-                android:text=":"
-                android:textAlignment="center"
-                android:textStyle="bold"
-                android:textSize="@dimen/_14sdp"
-                />
-            <TextView
-                android:id="@+id/doctorName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="vignesh"
-                android:textSize="@dimen/_14sdp" />
+                android:hint="Name"
+                >
+                <EditText
+                    android:id="@+id/doctorName"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="text"
+
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
 
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="specification in"
+                android:text="SPECIFICATION IN"
+                android:layout_margin="@dimen/_5sdp"
                 android:textAllCaps="true"
                 android:textSize="@dimen/_14sdp" />
-            <TextView
-                android:layout_width="@dimen/_20sdp"
+
+            <com.google.android.material.textfield.TextInputLayout
+
+                android:layout_width="@dimen/_140sdp"
+                android:layout_margin="@dimen/_5sdp"
                 android:layout_height="wrap_content"
-                android:text=":"
-                android:textAlignment="center"
-                android:textStyle="bold"
-                android:textSize="@dimen/_14sdp"
-                />
+                android:hint="Specification"
+                >
+                <EditText
+                    android:id="@+id/doctorSpecification"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="text"
 
-
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
             <TextView
-                android:id="@+id/specialist"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Cardiologists"
-                android:textSize="@dimen/_14sdp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="EXPERIENCE"
+                android:text="Experience"
+                android:layout_margin="@dimen/_5sdp"
                 android:textAllCaps="true"
                 android:textSize="@dimen/_14sdp" />
-            <TextView
-                android:layout_width="@dimen/_20sdp"
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="@dimen/_140sdp"
+                android:layout_margin="@dimen/_5sdp"
                 android:layout_height="wrap_content"
-                android:text=":"
-                android:textAlignment="center"
-                android:textStyle="bold"
-                android:textSize="@dimen/_14sdp"
-                />
+                android:hint="Experience"
+                >
+                <EditText
+                    android:id="@+id/doctorExperience"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="number"
 
-
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
             <TextView
-                android:id="@+id/experience"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="10"
+                android:text="Problem related"
+                android:textAllCaps="true"
+                android:layout_margin="@dimen/_5sdp"
+                android:layout_weight="1"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:textSize="@dimen/_14sdp"
+                />
+           <com.google.android.material.textfield.TextInputLayout
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_margin="@dimen/_5sdp"
+               >
+               <Spinner
+                   android:background="@drawable/dialogbox_border"
+                   android:id="@+id/problemRelatedToSpinner"
+                   android:layout_width="@dimen/_140sdp"
+                   android:layout_height="@dimen/_40sdp"
+                   android:layout_weight="1"
+                   android:foreground="@drawable/arrow_drop_down"
+                   android:foregroundGravity="center|right"
+                   />
+           </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Working in"
+                android:layout_margin="@dimen/_5sdp"
+                android:textAllCaps="true"
                 android:textSize="@dimen/_14sdp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="@dimen/_140sdp"
+                android:layout_margin="@dimen/_5sdp"
+                android:layout_height="wrap_content"
+                android:hint="Working in"
+                >
+                <EditText
+                    android:id="@+id/doctorWorkingIn"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="text"
+
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
         </GridLayout>
         <TextView
             android:id="@+id/descriptionUserHealthTV"
@@ -123,7 +172,7 @@
                 />
         </com.google.android.material.textfield.TextInputLayout>
         <Button
-            android:id="@+id/goToWebsite"
+            android:id="@+id/add"
             android:layout_height="@dimen/_50sdp"
             android:layout_width="match_parent"
             android:layout_weight="1"
