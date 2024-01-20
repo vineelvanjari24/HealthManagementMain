@@ -30,7 +30,8 @@ public class tyhDB extends SQLiteOpenHelper {
         db.execSQL(q);
     }
 
-    public void addAilment(TYHTable na){
+    public void addAilment(TYHTable na)
+    {
         SQLiteDatabase db=this.getWritableDatabase();
         ContentValues cv=new ContentValues();
         cv.put("Ailment",na.Name);

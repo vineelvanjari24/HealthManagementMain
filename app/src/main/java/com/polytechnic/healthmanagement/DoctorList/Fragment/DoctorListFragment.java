@@ -86,10 +86,7 @@ String resource;
             edit.putBoolean("doctorList",false);
             edit.apply();
         }
-
         recyclerView.setAdapter(doctorAdapter);
-
-
         return  view;
     }
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -99,7 +96,5 @@ String resource;
             doctorAdapter = new DoctorAdapter(context ,"fromAdmin");
             recyclerView.setAdapter(doctorAdapter);
         }
-
     }
-
 }
