@@ -118,9 +118,7 @@ public class Login extends AppCompatActivity {
             changeTV.setOnClickListener(v ->{
                 backPress(true);
             });
-
         }
-
     }
 
     public void backPress(boolean flag){
