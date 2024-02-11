@@ -42,19 +42,26 @@
             android:textSize="30dp"
             android:text=""
             />
+
         <TextView
+            android:id="@+id/tyh_pa_t3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/tyh_pa_t3"
-            android:textSize="30dp"
             android:text=""
-            />
+            android:textSize="30dp" />
+
         <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/tyh_pa_t4"
         android:textSize="30dp"
         />
+
+        <TextView
+            android:id="@+id/tyh_pa_t"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="30dp" />
     </LinearLayout>
         <ImageView
             android:textAlignment="center"

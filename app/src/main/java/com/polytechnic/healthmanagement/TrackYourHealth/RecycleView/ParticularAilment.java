@@ -38,7 +38,6 @@ public class ParticularAilment extends RecyclerView.Adapter<ParticularAilment.Pa
     Context ct;
     public ParticularAilment(Context ct,TYHTable tt)
     {
-
         load(ct,tt);
     }
 
@@ -70,7 +69,7 @@ public class ParticularAilment extends RecyclerView.Adapter<ParticularAilment.Pa
             }
         });
         holder.date.setText(cusmdate);
-        if (tb.P1.equals("ParameterOne") || tb.P1.equals("ParameterTwo")) {
+        if (tb.P1.equals("ParameterOne") || tb.P1.equals("ParameterTwo") || tb.P1.equals("Invalid") || table.get(position).P1.equals("notInserted")) {
             holder.tv1.setVisibility(View.GONE);
             holder.tv2.setVisibility(View.GONE);
         }
@@ -78,7 +77,7 @@ public class ParticularAilment extends RecyclerView.Adapter<ParticularAilment.Pa
             holder.tv1.setText(tb.P1.replaceAll("_"," "));
             holder.tv2.setText(table.get(position).P1);
         }
-        if (tb.P2.equals("ParameterOne") || tb.P2.equals("ParameterTwo")) {
+        if (tb.P2.equals("ParameterOne") || tb.P2.equals("ParameterTwo") || tb.P2.equals("Invalid") ||table.get(position).P2.equals("notInserted")) {
             holder.tv3.setVisibility(View.GONE);
             holder.tv4.setVisibility(View.GONE);
         }

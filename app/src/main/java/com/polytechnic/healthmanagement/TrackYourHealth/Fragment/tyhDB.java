@@ -57,6 +57,20 @@ public class tyhDB extends SQLiteOpenHelper {
         return tables;
     }
 
+    public Boolean tableExistsOrNot(String tname){
+        SQLiteDatabase db=this.getReadableDatabase();
+        Cursor cur=db.rawQuery("Select * from "+TABLENAME,null);
+        ArrayList<String> existingTables=new ArrayList<>();
+        while(cur.moveToNext()){
+            String tns=cur.getString(1);
+            existingTables.add(tns);
+        }
+        if (existingTables.contains(tname))
+            return true;
+        else
+            return false;
+    }
+
     public void addTable(TYHTable table){
         SQLiteDatabase db=this.getWritableDatabase();
         if(table.P1.trim().equals(""))
@@ -143,12 +157,10 @@ public class tyhDB extends SQLiteOpenHelper {
         db.close();
         return Id;
     }
-
     public void deleteAilmentRecord(TYHTable t,int Id){
         SQLiteDatabase db=this.getWritableDatabase();
         db.delete(t.Name,"Id=?",new String[]{String.valueOf(Id)});
     }
-
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS "+TABLENAME);

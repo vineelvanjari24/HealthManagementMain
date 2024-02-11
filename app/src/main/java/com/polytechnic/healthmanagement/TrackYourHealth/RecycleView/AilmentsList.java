@@ -36,13 +36,11 @@ public class AilmentsList extends RecyclerView.Adapter<AilmentsList.AilmentsView
         this.ct=ct;
         load(ct);
     }
-
     public void load(Context ct){
         tyhDB db=new tyhDB(ct);
         tables=db.readAilments();
         notifyDataSetChanged();
     }
-
     @NonNull
     @Override
     public AilmentsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -111,14 +109,14 @@ public class AilmentsList extends RecyclerView.Adapter<AilmentsList.AilmentsView
                     ailmentname.setText(tb.Name.replaceAll("_"," "));
                     p1.setText(tb.P1.replaceAll("_"," "));
                     p2.setText(tb.P2.replaceAll("_"," "));
-                    if(tb.P1.equals("ParameterOne") || tb.P1.equals("ParameterTwo")) {
-                        p1.setVisibility(View.GONE);
-                        tv1.setVisibility(View.GONE);
-                    }
-                    if(tb.P2.equals("ParameterOne") || tb.P2.equals("ParameterTwo")) {
-                        p2.setVisibility(View.GONE);
-                        tv2.setVisibility(View.GONE);
-                    }
+//                    if(tb.P1.equals("ParameterOne") || tb.P1.equals("ParameterTwo")) {
+//                        p1.setVisibility(View.GONE);
+//                        tv1.setVisibility(View.GONE);
+//                    }
+//                    if(tb.P2.equals("ParameterOne") || tb.P2.equals("ParameterTwo")) {
+//                        p2.setVisibility(View.GONE);
+//                        tv2.setVisibility(View.GONE);
+//                    }
                     editAilment.show();
                     dcancel.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -131,24 +129,27 @@ public class AilmentsList extends RecyclerView.Adapter<AilmentsList.AilmentsView
                         @Override
                         public void onClick(View v) {
                             TYHTable th=new TYHTable();
+                            tyhDB db = new tyhDB(v.getContext());
+                            String tname=ailmentname.getText().toString().replaceAll(" ","_");
+                            Boolean te=db.tableExistsOrNot(tname);
                             if(ailmentname.getText().toString().trim().equals("")) {
                                 editAilment.dismiss();
                                 Toast.makeText(ct.getApplicationContext(), "Enter a valid Ailment Title", Toast.LENGTH_SHORT).show();
                             }
-                            else
-                                th.Name= ailmentname.getText().toString().replaceAll(" ","_");
-                            if(p1.getText().toString().trim().equals(""))
-                                th.P1="Invalid";
-                            else
-                                th.P1=p1.getText().toString().trim().replaceAll(" ","_");
-                            if(p2.getText().toString().trim().equals(""))
-                                th.P2="Invalid";
-                            else
-                                th.P2=p2.getText().toString().trim().replaceAll(" ","_");
-                            tyhDB db=new tyhDB(v.getContext());
-                            db.updateTables(th,tb.Name);
-                            editAilment.dismiss();
-                            load(v.getContext());
+                            else {
+                                th.Name = ailmentname.getText().toString().replaceAll(" ", "_");
+                                if (p1.getText().toString().trim().equals(""))
+                                    th.P1 = "Invalid";
+                                else
+                                    th.P1 = p1.getText().toString().trim().replaceAll(" ", "_");
+                                if (p2.getText().toString().trim().equals(""))
+                                    th.P2 = "Invalid";
+                                else
+                                    th.P2 = p2.getText().toString().trim().replaceAll(" ", "_");
+                                db.updateTables(th, tb.Name);
+                                editAilment.dismiss();
+                                load(v.getContext());
+                            }
                         }
                     });
 

@@ -45,7 +45,6 @@ public class Ailment extends AppCompatActivity {
         rv.setLayoutManager(new LinearLayoutManager(ac, LinearLayoutManager.VERTICAL,false));
         rv.setAdapter(pa);
 
-
         fbtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(android.view.View v) {
