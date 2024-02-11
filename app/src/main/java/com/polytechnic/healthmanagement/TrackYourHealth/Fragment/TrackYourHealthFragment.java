@@ -73,12 +73,16 @@ public class TrackYourHealthFragment extends Fragment {
                 if(ailmentname.getText().toString().trim().equals("")){
                     newAilment.dismiss();
                     Toast.makeText(getContext(), "Ailment Name is Must", Toast.LENGTH_SHORT).show();
-                }
-                else if(db.tableExistsOrNot(t.Name)){
+                }  else if (containsSpecialCharacters(t.Name)) {
+                    newAilment.dismiss();
+                    Toast.makeText(v.getContext(), "Table Name should not start with Number", Toast.LENGTH_SHORT).show();
+                } else if (Character.isDigit(t.Name.charAt(0))) {
+                    newAilment.dismiss();
+                    Toast.makeText(v.getContext(), "Table Name should not start with Number", Toast.LENGTH_SHORT).show();
+                } else if(db.tableExistsOrNot(t.Name)){
                     newAilment.dismiss();
                     Toast.makeText(v.getContext(), "Table Aldready Exists", Toast.LENGTH_SHORT).show();
-                }
-                else {
+                } else {
                     ailmentname.setText("");
                     t.P1 = p1.getText().toString().trim().replaceAll(" ", "_");
                     p1.setText("");
@@ -95,5 +99,9 @@ public class TrackYourHealthFragment extends Fragment {
             }
         });
         return View;
+    }
+    public boolean containsSpecialCharacters(String input) {
+        String regex = "^[a-zA-Z0-9_$]*$";
+        return input.matches(regex);
     }
 }
