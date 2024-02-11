@@ -25,7 +25,6 @@ import java.util.ArrayList;
 import kotlin.jvm.internal.FloatSpreadBuilder;
 
 public class TrackYourHealthFragment extends Fragment {
-
     RecyclerView rv;
     FloatingActionButton fbtn;
     EditText ailmentname,p1,p2;
@@ -39,7 +38,6 @@ public class TrackYourHealthFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
         View View= inflater.inflate(R.layout.fragment_track_your_health, container, false);
         rv=View.findViewById(R.id.tyh_main_rv);
         fbtn=View.findViewById(R.id.tyh_main_floatbtn);
@@ -66,6 +64,7 @@ public class TrackYourHealthFragment extends Fragment {
         dsave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(android.view.View v) {
+                tyhDB db = new tyhDB(getContext());
                 ailmentname=newAilment.findViewById(R.id.tyh_main_title);
                 p1=newAilment.findViewById(R.id.tyh_main_p1);
                 p2=newAilment.findViewById(R.id.tyh_main_p2);
@@ -74,6 +73,10 @@ public class TrackYourHealthFragment extends Fragment {
                 if(ailmentname.getText().toString().trim().equals("")){
                     newAilment.dismiss();
                     Toast.makeText(getContext(), "Ailment Name is Must", Toast.LENGTH_SHORT).show();
+                }
+                else if(db.tableExistsOrNot(t.Name)){
+                    newAilment.dismiss();
+                    Toast.makeText(v.getContext(), "Table Aldready Exists", Toast.LENGTH_SHORT).show();
                 }
                 else {
                     ailmentname.setText("");
@@ -84,7 +87,6 @@ public class TrackYourHealthFragment extends Fragment {
                     p2.setText("");
                     p2.clearFocus();
                     newAilment.dismiss();
-                    tyhDB db = new tyhDB(getContext());
                     db.addAilment(t);
                     db.addTable(t);
                     Toast.makeText(getContext(), "Ailment Saved", Toast.LENGTH_SHORT).show();
