@@ -48,7 +48,7 @@ public class Ailment extends AppCompatActivity {
         fbtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(android.view.View v) {
-                Dialog addAilmentRecord=new Dialog(v.getContext());
+                Dialog addAilmentRecord=new Dialog(v.getContext(),R.style.Dialogbox_border);
                 addAilmentRecord.setContentView(R.layout.tyh_addailment_dialog);
                 addAilmentRecord.setCancelable(false);
                 tv1=addAilmentRecord.findViewById(R.id.tyh_ailment_text1);

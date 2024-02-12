@@ -251,7 +251,7 @@ public class UserHealthAdapter extends RecyclerView.Adapter<UserHealthAdapter.Vi
     public int getItemCount() {
         return arrayList.size();
     }
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder  {
         TextView issueTV,descriptionTV,createdDateTV,editedDateTV;
         CardView cardView;
         public ViewHolder(@NonNull View itemView) {

@@ -73,9 +73,9 @@ public class TrackYourHealthFragment extends Fragment {
                 if(ailmentname.getText().toString().trim().equals("")){
                     newAilment.dismiss();
                     Toast.makeText(getContext(), "Ailment Name is Must", Toast.LENGTH_SHORT).show();
-                }  else if (containsSpecialCharacters(t.Name)) {
+                }  else if (!containsSpecialCharacters(t.Name)) {
                     newAilment.dismiss();
-                    Toast.makeText(v.getContext(), "Table Name should not start with Number", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(v.getContext(), "Table Name should contain a-z or  0-9  or _  or $ ", Toast.LENGTH_SHORT).show();
                 } else if (Character.isDigit(t.Name.charAt(0))) {
                     newAilment.dismiss();
                     Toast.makeText(v.getContext(), "Table Name should not start with Number", Toast.LENGTH_SHORT).show();

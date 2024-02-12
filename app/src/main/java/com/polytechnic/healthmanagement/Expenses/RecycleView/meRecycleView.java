@@ -87,7 +87,7 @@ public class meRecycleView extends RecyclerView.Adapter<meRecycleView.meViewHold
             ImageView close;
             @Override
             public void onClick(View v) {
-                Dialog see=new Dialog(v.getContext());
+                Dialog see=new Dialog(v.getContext(),R.style.Dialogbox_border);
                 see.setContentView(R.layout.me_desc_dialog);
                 tv1=see.findViewById(R.id.me_desc_dialog_tv1);
                 tv2=see.findViewById(R.id.me_desc_dialog_tv2);
@@ -124,7 +124,7 @@ public class meRecycleView extends RecyclerView.Adapter<meRecycleView.meViewHold
             public boolean onMenuItemClick(MenuItem item) {
                 CharSequence title = item.getTitle();
                 if (title.equals("Edit")) {
-                    Dialog editMeRecord = new Dialog(v.getContext());
+                    Dialog editMeRecord = new Dialog(v.getContext(),R.style.Dialogbox_border);
                     editMeRecord.setCancelable(false);
                     editMeRecord.setContentView(R.layout.me_new_record_dialog);
                     Button mecancel = editMeRecord.findViewById(R.id.me_dialog_cancel);
