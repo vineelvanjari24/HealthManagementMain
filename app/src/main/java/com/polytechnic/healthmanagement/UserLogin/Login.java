@@ -75,7 +75,7 @@ public class Login extends AppCompatActivity {
                         }
                     });
                 findViewById(R.id.register).setOnClickListener(v ->{
-                    startActivity(new Intent(getApplicationContext(),RegisterUser.class));
+                    startActivity(new Intent(getApplicationContext(),MainActivity.class));
             });
             changeTV.setOnClickListener(v ->{
                 backPress(false);

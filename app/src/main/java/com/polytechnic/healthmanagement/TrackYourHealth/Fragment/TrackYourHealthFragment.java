@@ -3,6 +3,9 @@ package com.polytechnic.healthmanagement.TrackYourHealth.Fragment;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,10 +29,12 @@ import kotlin.jvm.internal.FloatSpreadBuilder;
 
 public class TrackYourHealthFragment extends Fragment {
     RecyclerView rv;
+    AilmentsList a;
     FloatingActionButton fbtn;
     EditText ailmentname,p1,p2;
     Button dcancel,dsave;
     ArrayList<TYHTable> tablearr;
+    EditText search;
     public TrackYourHealthFragment() {
         // Required empty public constructor
     }
@@ -41,14 +46,42 @@ public class TrackYourHealthFragment extends Fragment {
         View View= inflater.inflate(R.layout.fragment_track_your_health, container, false);
         rv=View.findViewById(R.id.tyh_main_rv);
         fbtn=View.findViewById(R.id.tyh_main_floatbtn);
+        search=View.findViewById(R.id.tyh_search);
         Dialog newAilment=new Dialog(View.getContext());
         newAilment.setCancelable(false);
         newAilment.setContentView(R.layout.tyh_main_dialogbox);
         dcancel=newAilment.findViewById(R.id.tyh_main_dialog_cancel);
         dsave=newAilment.findViewById(R.id.tyh_main_dialog_save);
-        AilmentsList a=new AilmentsList(getContext());
+        a=new AilmentsList(getContext());
         rv.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL,false));
         rv.setAdapter(a);
+        search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {a.filter(s.toString());
+            }
+        });
+        search.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
+                    search.clearFocus();
+                    search.setText("");
+                    a.load(getContext());
+                    return true;
+                }
+                return false;
+            }
+        });
         fbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(android.view.View v) {
@@ -104,4 +137,5 @@ public class TrackYourHealthFragment extends Fragment {
         String regex = "^[a-zA-Z0-9_$]*$";
         return input.matches(regex);
     }
+
 }

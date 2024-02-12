@@ -3,10 +3,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".fragments.AccountsFragment">
+    android:orientation="vertical">
 
+     <EditText
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:hint="Search Here"
+         android:padding="2dp"
+         android:layout_margin="10dp"
+         android:id="@+id/tyh_search"
+         />
+     
      <androidx.recyclerview.widget.RecyclerView
+         android:layout_below="@+id/tyh_search"
          android:layout_width="match_parent"
          android:layout_height="match_parent"
          android:id="@+id/tyh_main_rv"

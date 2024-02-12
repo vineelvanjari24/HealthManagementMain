@@ -180,4 +180,21 @@ public class AilmentsList extends RecyclerView.Adapter<AilmentsList.AilmentsView
         });
         popupMenu.show();
     }
+    public void filterList(ArrayList<TYHTable> arrs){
+        tables=arrs;
+        notifyDataSetChanged();
+    }
+    public void filter(String text){
+        ArrayList<TYHTable> newta=new ArrayList<>();
+        for (TYHTable t:tables){
+            if(t.Name.toLowerCase().contains(text.toLowerCase().trim())){
+                newta.add(t);
+            } else if (t.P1.toString().contains(text.toLowerCase())) {
+                newta.add(t);
+            }else if (t.P1.toString().contains(text.toLowerCase())) {
+                newta.add(t);
+            }
+        }
+        filterList(newta);
+    }
 }

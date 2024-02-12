@@ -21,6 +21,8 @@ import com.polytechnic.healthmanagement.TrackYourHealth.Model.TYHTable;
 import com.polytechnic.healthmanagement.TrackYourHealth.RecycleView.AilmentsList;
 import com.polytechnic.healthmanagement.TrackYourHealth.RecycleView.ParticularAilment;
 
+import java.util.ArrayList;
+
 public class Ailment extends AppCompatActivity {
     TextView tv1,tv2;
     EditText v1,v2;
@@ -98,4 +100,5 @@ public class Ailment extends AppCompatActivity {
             }
         });
     }
+
 }
