@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp">
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:columnCount="2">
+            <TextView
+                android:layout_width="@dimen/_150sdp"
+                android:layout_height="wrap_content"
+                android:textSize="24sp"
+                android:text="title"
+                android:id="@+id/tyh_ailment_text1"
+                />
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="@dimen/_150sdp"
+                android:layout_height="wrap_content"
+                android:hint="Enter Value">
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="24sp"
+                    android:id="@+id/tyh_Ailment_value1"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                android:layout_width="@dimen/_150sdp"
+                android:layout_height="wrap_content"
+                android:textSize="24sp"
+                android:id="@+id/tyh_ailment_text2"
+                android:text="tiltle"
+                />
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="@dimen/_150sdp"
+                android:layout_height="wrap_content"
+                android:hint="Enter Value">
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="24sp"
+                    android:id="@+id/tyh_Ailment_value2"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+    </GridLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:gravity="center"
+        android:layout_marginTop="20dp">
+
+        <Button
+            android:id="@+id/tyh_Ailment_Dialog_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cancel"
+            android:layout_weight="1"
+            android:textSize="24sp"
+            />
+
+        <Button
+            android:id="@+id/tyh_Ailment_Dialog_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Save"
+
+            android:layout_weight="1"
+            android:textSize="24sp"
+            android:layout_alignParentRight="true"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>

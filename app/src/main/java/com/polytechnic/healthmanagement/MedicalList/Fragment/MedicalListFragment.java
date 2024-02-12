@@ -1,66 +1,130 @@
 package com.polytechnic.healthmanagement.MedicalList.Fragment;
 
+import android.app.Dialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.polytechnic.healthmanagement.R;
 
+import java.util.ArrayList;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link MedicalListFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class MedicalListFragment extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
+    CollectionReference cref= FirebaseFirestore.getInstance().collection("MedicalList");
+    ArrayList<Medicine> mlarr=new ArrayList<>();
+    RecyclerView mlrv;
+    FloatingActionButton mlfbtn;
+    Button save,cancel;
+    EditText cn,cf,md;
+    Context context;
     public MedicalListFragment() {
         // Required empty public constructor
     }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment AnalysisFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static MedicalListFragment newInstance(String param1, String param2) {
-        MedicalListFragment fragment = new MedicalListFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+    public MedicalListFragment(Context context) {
+        this.context=context;
     }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_medical_list, container, false);
+        View view=inflater.inflate(R.layout.fragment_medical_list, container, false);
+
+        mlrv=view.findViewById(R.id.ml_rv);
+        mlfbtn=view.findViewById(R.id.mlfbtn);
+
+
+        mlfbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Dialog newmed=new Dialog(getContext());
+                newmed.setContentView(R.layout.med_add_dialog);
+                newmed.setCancelable(false);
+
+                cn=newmed.findViewById(R.id.ml_edit_cn);
+                cf=newmed.findViewById(R.id.ml_edit_cf);
+                md=newmed.findViewById(R.id.ml_edit_med);
+                save=newmed.findViewById(R.id.ml_save);
+                cancel=newmed.findViewById(R.id.ml_cancel);
+
+                cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        newmed.dismiss();
+                        Toast.makeText(context, "Canceled", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                save.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        newmed.dismiss();
+                        Medicine med=new Medicine();
+                        med.cn=cn.getText().toString();
+                        med.cf=cf.getText().toString();
+                        med.med=md.getText().toString();
+                        cref.add(med)
+                                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                    @Override
+                                    public void onSuccess(DocumentReference documentReference) {
+                                        Toast.makeText(getContext(), "Added Successfully", Toast.LENGTH_SHORT).show();
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(context, "Failed To Add to Online Database", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                    }
+                });
+                newmed.show();
+            }
+        });
+        return view;
+    }
+    @Override
+    public void onStart() {
+        super.onStart();
+        cref.addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                if(error!=null){
+                    Toast.makeText(context, "Error : "+error, Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    mlarr.clear();
+                    for(QueryDocumentSnapshot qd:value) {
+                        Medicine newmedicine = new Medicine();
+                        newmedicine =qd.toObject(Medicine.class);
+                        newmedicine.Id= qd.getId();
+                        mlarr.add(newmedicine);
+                    }
+                    MedAdapter medadpt=new MedAdapter(context,mlarr);
+                    mlrv.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false));
+                    mlrv.setAdapter(medadpt);
+                }
+            }
+        });
     }
 }

@@ -1,15 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.AnalysisFragment">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    tools:context=".medicallist.MainActivity">
+    <TableLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="medical List"
-        android:textSize="@dimen/_50sdp"/>
+        >
+        <TableRow
+            android:layout_height="match_parent"
+            android:padding="10dp"
+            android:background="@color/dm">
 
-</FrameLayout>
+            <TextView
+                android:layout_column="1"
+                android:layout_margin="2dp"
+                android:layout_weight="1"
+                android:background="@drawable/text_shape"
+                android:backgroundTint="@color/purple_700"
+                android:padding="2dp"
+                android:text="Chemical\nName"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_column="2"
+                android:layout_margin="2dp"
+                android:layout_weight="3"
+                android:background="@drawable/text_shape"
+                android:backgroundTint="@color/purple_700"
+                android:padding="2dp"
+                android:text="Medicines\n"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_column="3"
+                android:layout_margin="2dp"
+                android:layout_weight="2"
+                android:background="@drawable/text_shape"
+                android:backgroundTint="@color/purple_700"
+                android:padding="2dp"
+                android:text="Chemical\nFormula"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+        </TableRow>
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/ml_rv"
+            android:layout_weight="1"/>
+
+
+    </TableLayout>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/mlfbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/med_add"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="20dp"
+        />
+</RelativeLayout>

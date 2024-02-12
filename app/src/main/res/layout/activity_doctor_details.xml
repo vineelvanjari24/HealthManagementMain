@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    android:id="@+id/userHealthScrollView"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DoctorList.DoctorActivity"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/linearLayout"
+        android:gravity="center"
+        >
+        <include layout="@layout/toolbar_drawable_layout"
+            android:id="@+id/toolbar"
+            />
+        <ImageView
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_100sdp"
+            android:layout_margin="@dimen/_10sdp"
+            android:background="@drawable/dialogbox_border"
+            android:src="@drawable/doctor"
+            />
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_10sdp"
+            android:columnCount="2">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="NAME"
+                android:layout_margin="@dimen/_5sdp"
+                android:textAllCaps="true"
+                android:textSize="@dimen/_14sdp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="@dimen/_140sdp"
+                android:layout_margin="@dimen/_5sdp"
+                android:layout_height="wrap_content"
+                android:hint="Name"
+                >
+                <EditText
+                    android:id="@+id/doctorName"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="text"
+
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SPECIFICATION IN"
+                android:layout_margin="@dimen/_5sdp"
+                android:textAllCaps="true"
+                android:textSize="@dimen/_14sdp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+
+                android:layout_width="@dimen/_140sdp"
+                android:layout_margin="@dimen/_5sdp"
+                android:layout_height="wrap_content"
+                android:hint="Specification"
+                >
+                <EditText
+                    android:id="@+id/doctorSpecification"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="text"
+
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Experience"
+                android:layout_margin="@dimen/_5sdp"
+                android:textAllCaps="true"
+                android:textSize="@dimen/_14sdp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="@dimen/_140sdp"
+                android:layout_margin="@dimen/_5sdp"
+                android:layout_height="wrap_content"
+                android:hint="Experience"
+                >
+                <EditText
+                    android:id="@+id/doctorExperience"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="number"
+
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Problem related"
+                android:textAllCaps="true"
+                android:layout_margin="@dimen/_5sdp"
+                android:layout_weight="1"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:textSize="@dimen/_14sdp"
+                />
+           <com.google.android.material.textfield.TextInputLayout
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_margin="@dimen/_5sdp"
+               >
+               <Spinner
+                   android:background="@drawable/dialogbox_border"
+                   android:id="@+id/problemRelatedToSpinner"
+                   android:layout_width="@dimen/_140sdp"
+                   android:layout_height="@dimen/_40sdp"
+                   android:layout_weight="1"
+                   android:foreground="@drawable/arrow_drop_down"
+                   android:foregroundGravity="center|right"
+                   />
+           </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Working in"
+                android:layout_margin="@dimen/_5sdp"
+                android:textAllCaps="true"
+                android:textSize="@dimen/_14sdp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="@dimen/_140sdp"
+                android:layout_margin="@dimen/_5sdp"
+                android:layout_height="wrap_content"
+                android:hint="Working in"
+                >
+                <EditText
+                    android:id="@+id/doctorWorkingIn"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="text"
+
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+        </GridLayout>
+        <TextView
+            android:id="@+id/descriptionUserHealthTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Description"
+            android:textStyle="bold"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:textSize="@dimen/_14sdp"
+            />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/descriptionTextInputLayout"
+            android:layout_width="match_parent"
+            android:layout_margin="@dimen/_10sdp"
+            android:layout_height="wrap_content"
+            android:hint="Description"
+            >
+            <EditText
+                android:id="@+id/doctorDescription"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+        <Button
+            android:id="@+id/add"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_margin="@dimen/_10sdp"
+            app:cornerRadius="@dimen/_10sdp"
+            android:textSize="@dimen/_14sdp"
+            android:textAllCaps="true"
+            android:textStyle="bold"
+            android:text="go to website"
+            />
+    </LinearLayout>
+</ScrollView>
