@@ -246,7 +246,6 @@ public class DoctorListFragment extends Fragment {
             Toast.makeText(context, "Image not Selected", Toast.LENGTH_SHORT).show();
         }
     }
-
     public void onStart() {
         super.onStart();
         docref.addSnapshotListener(new EventListener<QuerySnapshot>() {

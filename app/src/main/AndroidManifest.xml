@@ -39,6 +39,9 @@
             android:name=".UserHealth.AddUserHealthActivity"
             android:exported="false" />
         <activity
+            android:name=".DoctorList.Fragment.EditDoctor"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="false"></activity>
     </application>
