@@ -96,7 +96,7 @@ public class AilmentsList extends RecyclerView.Adapter<AilmentsList.AilmentsView
             public boolean onMenuItemClick(MenuItem item) {
                 CharSequence title = item.getTitle();
                 if (title.equals("Edit")){
-                    Dialog editAilment=new Dialog(v.getContext());
+                    Dialog editAilment=new Dialog(v.getContext(),R.style.Dialogbox_border);
                     editAilment.setCancelable(false);
                     editAilment.setContentView(R.layout.tyh_main_dialogbox);
                     Button dcancel=editAilment.findViewById(R.id.tyh_main_dialog_cancel);
@@ -155,7 +155,7 @@ public class AilmentsList extends RecyclerView.Adapter<AilmentsList.AilmentsView
 
                         return true;
                 } else if (title.equals("Delete")) {
-                    AlertDialog.Builder confirm=new AlertDialog.Builder(ct);
+                    AlertDialog.Builder confirm=new AlertDialog.Builder(ct,R.style.Dialogbox_border);
                     confirm.setTitle("Delete Confirmation");
                     confirm.setMessage("Do you want to delete for sure?");
                     confirm.setPositiveButton("Yes", new DialogInterface.OnClickListener() {

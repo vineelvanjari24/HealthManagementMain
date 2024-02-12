@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/_75sdp"
     app:cardCornerRadius="@dimen/_10sdp"
-    android:backgroundTint="@color/orange"
+    android:backgroundTint="@color/lightblue"
     android:layout_margin="@dimen/_5sdp"
     android:orientation="vertical"
     android:foreground="?attr/selectableItemBackground"
@@ -22,7 +22,7 @@
                android:layout_height="@dimen/_23sdp"
                android:textSize="@dimen/_18sdp"
                android:textAlignment="center"
-               android:text="blood preasure "
+               android:text="varun "
                android:ems="20"
                android:textColor="@color/black"
                android:textAllCaps="true"
@@ -39,7 +39,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="19"
-                    android:text="description"
+                    android:text="akber"
                     />
             <LinearLayout
                 android:layout_width="wrap_content"

@@ -31,7 +31,7 @@ public class ExpensesFragment extends Fragment {
 
         rv=v.findViewById(R.id.merecyclv);
         fbtn=v.findViewById(R.id.mefbt);
-        Dialog newme=new Dialog(v.getContext());
+        Dialog newme=new Dialog(v.getContext(),R.style.Dialogbox_border);
         newme.setContentView(R.layout.me_new_record_dialog);
         newme.setCancelable(false);
         mecancel=newme.findViewById(R.id.me_dialog_cancel);

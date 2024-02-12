@@ -112,7 +112,7 @@ public class ParticularAilment extends RecyclerView.Adapter<ParticularAilment.Pa
             public boolean onMenuItemClick(MenuItem item) {
                 CharSequence title = item.getTitle();
                 if (title.equals("Edit")) {
-                    Dialog editAilmentRecord = new Dialog(v.getContext());
+                    Dialog editAilmentRecord = new Dialog(v.getContext(),R.style.Dialogbox_border);
                     editAilmentRecord.setCancelable(false);
                     editAilmentRecord.setContentView(R.layout.tyh_addailment_dialog);
                     Button dcancel = editAilmentRecord.findViewById(R.id.tyh_Ailment_Dialog_cancel);
@@ -167,7 +167,7 @@ public class ParticularAilment extends RecyclerView.Adapter<ParticularAilment.Pa
 
                     return true;
                 }else if (title.equals("Delete")) {
-                    AlertDialog.Builder confirm=new AlertDialog.Builder(v.getContext());
+                    AlertDialog.Builder confirm=new AlertDialog.Builder(v.getContext(),R.style.Dialogbox_border);
                     confirm.setTitle("Delete Confirmation");
                     confirm.setMessage("Do you want to delete for sure?");
                     confirm.setCancelable(false);
