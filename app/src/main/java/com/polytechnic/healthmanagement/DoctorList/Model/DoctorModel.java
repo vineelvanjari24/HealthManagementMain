@@ -1,5 +1,4 @@
 package com.polytechnic.healthmanagement.DoctorList.Model;
-
 public class DoctorModel {
     public String name,description,specialist,experience,workingIn,problemRelatedTo;
     public int id;
@@ -11,6 +10,4 @@ public class DoctorModel {
         this.workingIn=workingIn;
         this.problemRelatedTo=problemRelatedTo;
         this.id=id;
-    }
-
-}
+    }}
