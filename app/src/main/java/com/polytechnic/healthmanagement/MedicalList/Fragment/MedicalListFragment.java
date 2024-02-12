@@ -87,7 +87,7 @@ public class MedicalListFragment extends Fragment {
                                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                     @Override
                                     public void onSuccess(DocumentReference documentReference) {
-                                        Toast.makeText(context, "Added Successfully", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getContext(), "Added Successfully", Toast.LENGTH_SHORT).show();
                                     }
                                 })
                                 .addOnFailureListener(new OnFailureListener() {

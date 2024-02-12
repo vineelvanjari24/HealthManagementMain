@@ -107,13 +107,13 @@ public class MedAdapter extends RecyclerView.Adapter<MedAdapter.MedViewHolder> {
                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void unused) {
-                                            Toast.makeText(ct, "Edited Successfully", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(v.getContext(), "Edited Successfully", Toast.LENGTH_SHORT).show();
                                         }
                                     })
                                     .addOnFailureListener(new OnFailureListener() {
                                         @Override
                                         public void onFailure(@NonNull Exception e) {
-                                            Toast.makeText(ct, "Failed To Edit \n Try Again Later", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(v.getContext(), "Failed To Edit \n Try Again Later", Toast.LENGTH_SHORT).show();
                                         }
                                     });
                         }
@@ -131,13 +131,13 @@ public class MedAdapter extends RecyclerView.Adapter<MedAdapter.MedViewHolder> {
                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void unused) {
-                                            Toast.makeText(ct, "Deleted Successfully", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(v.getContext(), "Deleted Successfully", Toast.LENGTH_SHORT).show();
                                         }
                                     })
                                     .addOnFailureListener(new OnFailureListener() {
                                         @Override
                                         public void onFailure(@NonNull Exception e) {
-                                            Toast.makeText(ct, "Failed to delete \n Try again later", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(v.getContext(), "Failed to delete \n Try again later", Toast.LENGTH_SHORT).show();
                                         }
                                     });
                         }

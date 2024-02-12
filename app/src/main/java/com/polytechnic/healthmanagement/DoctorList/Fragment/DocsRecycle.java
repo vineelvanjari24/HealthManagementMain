@@ -130,7 +130,7 @@ public class DocsRecycle extends RecyclerView.Adapter<DocsRecycle.DocsViewHolder
                     @Override
                     public void onClick(View v) {
                                 docdet.dismiss();
-                                Intent intent=new Intent(v.getContext(),EditDoctor.class);
+                                Intent intent=new Intent(ct,EditDoctor.class);
                                 intent.putExtra("Name",d.get(position).name);
                                 intent.putExtra("Spec",d.get(position).spec);
                                 intent.putExtra("Desc",d.get(position).desc);

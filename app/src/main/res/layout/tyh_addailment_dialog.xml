@@ -45,11 +45,12 @@
                     />
             </com.google.android.material.textfield.TextInputLayout>
     </GridLayout>
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="10dp"
+        android:gravity="center"
         android:layout_marginTop="20dp">
 
         <Button
@@ -57,6 +58,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Cancel"
+            android:layout_weight="1"
             android:textSize="24sp"
             />
 
@@ -65,10 +67,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Save"
+
+            android:layout_weight="1"
             android:textSize="24sp"
             android:layout_alignParentRight="true"
             />
 
-    </RelativeLayout>
+    </LinearLayout>
 
 </LinearLayout>

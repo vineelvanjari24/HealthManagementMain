@@ -46,6 +46,7 @@ public class Login extends AppCompatActivity {
 
             UserLoginDB UserLoginDb = new UserLoginDB(this);
             loginButton.setOnClickListener(v ->{
+
                         String usernameString = username.getText().toString().trim();
                         String passwordString = password.getText().toString().trim();
                         if(usernameString.isEmpty()  || passwordString.isEmpty()){

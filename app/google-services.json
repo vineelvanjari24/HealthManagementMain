@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1083469459122",
+    "project_id": "healthmanagement-9fff5",
+    "storage_bucket": "healthmanagement-9fff5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1083469459122:android:c7f0a20c356dd2ddbfa3ab",
+        "android_client_info": {
+          "package_name": "com.polytechnic.healthmanagement"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCXiPWliWB6Ad4pJZwEosUFQXYB-P1gGds"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
