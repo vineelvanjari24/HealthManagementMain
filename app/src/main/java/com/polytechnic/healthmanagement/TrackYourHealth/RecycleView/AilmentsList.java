@@ -27,6 +27,7 @@ import com.polytechnic.healthmanagement.TrackYourHealth.Fragment.tyhDB;
 import com.polytechnic.healthmanagement.TrackYourHealth.Model.TYHTable;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class AilmentsList extends RecyclerView.Adapter<AilmentsList.AilmentsViewHolder> {
     ArrayList<TYHTable> tables=new ArrayList<>();
@@ -39,6 +40,11 @@ public class AilmentsList extends RecyclerView.Adapter<AilmentsList.AilmentsView
     public void load(Context ct){
         tyhDB db=new tyhDB(ct);
         tables=db.readAilments();
+        notifyDataSetChanged();
+    }
+    public void revload(Context ct){
+        load(ct);
+        Collections.reverse(tables);
         notifyDataSetChanged();
     }
     @NonNull

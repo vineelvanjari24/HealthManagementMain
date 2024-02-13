@@ -7,13 +7,16 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import androidx.appcompat.widget.PopupMenu;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -35,6 +38,7 @@ public class TrackYourHealthFragment extends Fragment {
     Button dcancel,dsave;
     ArrayList<TYHTable> tablearr;
     EditText search;
+    ImageView sort_ailments;
     public TrackYourHealthFragment() {
         // Required empty public constructor
     }
@@ -47,6 +51,14 @@ public class TrackYourHealthFragment extends Fragment {
         rv=View.findViewById(R.id.tyh_main_rv);
         fbtn=View.findViewById(R.id.tyh_main_floatbtn);
         search=View.findViewById(R.id.tyh_search);
+        sort_ailments=View.findViewById(R.id.tyh_sort);
+        sort_ailments.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(android.view.View v) {
+                showsortMenu(v);
+            }
+        });
+
         Dialog newAilment=new Dialog(View.getContext());
         newAilment.setCancelable(false);
         newAilment.setContentView(R.layout.tyh_main_dialogbox);
@@ -115,20 +127,30 @@ public class TrackYourHealthFragment extends Fragment {
                 } else if(db.tableExistsOrNot(t.Name)){
                     newAilment.dismiss();
                     Toast.makeText(v.getContext(), "Table Aldready Exists", Toast.LENGTH_SHORT).show();
-                } else {
-                    ailmentname.setText("");
+                } else if (!containsSpecialCharacters(p1.getText().toString().trim()) ||!containsSpecialCharacters(p2.getText().toString().trim()) ){
+                    newAilment.dismiss();
+                    Toast.makeText(v.getContext(), "Parameter Name should contain only \n a-z , 0-9 , _ , $", Toast.LENGTH_SHORT).show();
+                } else if (!p1.getText().toString().isEmpty() && Character.isDigit(p1.getText().toString().trim().charAt(0))){
+                    newAilment.dismiss();
+                    Toast.makeText(v.getContext(), "Parameter Name should not start with numbers", Toast.LENGTH_SHORT).show();
+                }  else if (!p2.getText().toString().isEmpty() && Character.isDigit(p2.getText().toString().trim().charAt(0))){
+                    newAilment.dismiss();
+                    Toast.makeText(v.getContext(), "Parameter Name should not start with numbers", Toast.LENGTH_SHORT).show();
+                }
+                else {
                     t.P1 = p1.getText().toString().trim().replaceAll(" ", "_");
-                    p1.setText("");
-                    p1.clearFocus();
                     t.P2 = p2.getText().toString().trim().replaceAll(" ", "_");
-                    p2.setText("");
-                    p2.clearFocus();
                     newAilment.dismiss();
                     db.addAilment(t);
                     db.addTable(t);
                     Toast.makeText(getContext(), "Ailment Saved", Toast.LENGTH_SHORT).show();
                     a.load(getContext());
                 }
+                ailmentname.setText("");
+                p1.setText("");
+                p1.clearFocus();
+                p2.setText("");
+                p2.clearFocus();
             }
         });
         return View;
@@ -137,5 +159,23 @@ public class TrackYourHealthFragment extends Fragment {
         String regex = "^[a-zA-Z0-9_$]*$";
         return input.matches(regex);
     }
-
+    public void showsortMenu(View v){
+        PopupMenu popupMenu = new PopupMenu(v.getContext(), v);
+        popupMenu.getMenuInflater().inflate(R.menu.sort_items, popupMenu.getMenu());
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                CharSequence title = item.getTitle();
+                if (title.equals("New To Old")){
+                    a.load(v.getContext());
+                    return true;
+                } else if (title.equals("Old To New")) {
+                    a.revload(v.getContext());
+                    return true;
+                }
+                return true;
+            }
+        });
+        popupMenu.show();
+    }
 }

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/sort_ont"
+        android:title="Old To New"/>
+    <item android:id="@+id/sort_nto"
+        android:title="New To Old" />
+</menu>

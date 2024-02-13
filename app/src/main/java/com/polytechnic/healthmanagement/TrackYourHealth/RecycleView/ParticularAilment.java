@@ -59,7 +59,7 @@ public class ParticularAilment extends RecyclerView.Adapter<ParticularAilment.Pa
     @Override
     public void onBindViewHolder(@NonNull ParticularAilmentViewHolder holder, int position) {
         Date d1 = new Date();
-        String cusmdate = new SimpleDateFormat("YYYY-MM-DD").format(d1);
+        String cusmdate = new SimpleDateFormat("yyyy-MM-dd").format(d1);
         holder.im.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

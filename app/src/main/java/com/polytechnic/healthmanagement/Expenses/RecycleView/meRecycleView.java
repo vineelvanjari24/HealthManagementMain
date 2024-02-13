@@ -30,6 +30,7 @@ import com.polytechnic.healthmanagement.TrackYourHealth.RecycleView.AilmentsList
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 
 public class meRecycleView extends RecyclerView.Adapter<meRecycleView.meViewHolder> {
@@ -40,6 +41,11 @@ public class meRecycleView extends RecyclerView.Adapter<meRecycleView.meViewHold
     public void load(Context ct){
         medb db=new medb(ct);
         mearr=db.readRecords();
+        notifyDataSetChanged();
+    }
+    public void revload(Context ct){
+        load(ct);
+        Collections.reverse(mearr);
         notifyDataSetChanged();
     }
     class meViewHolder extends RecyclerView.ViewHolder{
@@ -70,10 +76,10 @@ public class meRecycleView extends RecyclerView.Adapter<meRecycleView.meViewHold
     @Override
     public void onBindViewHolder(@NonNull meViewHolder holder, int position) {
         holder.title.setText((mearr.get(position)).title);
-        int amt=(mearr.get(position).docfee+mearr.get(position).other+mearr.get(position).medexp+mearr.get(position).trans);
-        holder.amount.setText(""+amt);
-        String cusdate=new SimpleDateFormat("YYYY-MM-DD").format(new Date());
-        holder.date.setText(cusdate);
+        mearr.get(position).tt();
+//        int amt=(mearr.get(position).docfee+mearr.get(position).other+mearr.get(position).medexp+mearr.get(position).trans);
+        holder.amount.setText(""+mearr.get(position).tamt);
+        holder.date.setText(mearr.get(position).date);
         holder.im.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,12 +102,13 @@ public class meRecycleView extends RecyclerView.Adapter<meRecycleView.meViewHold
                 tv5=see.findViewById(R.id.me_desc_dialog_tv5);
                 tv6=see.findViewById(R.id.me_desc_dialog_tv6);
                 close=see.findViewById(R.id.me_desc_dialog_close);
+                mearr.get(position).tt();
                 tv1.setText((mearr.get(position).title));
                 tv2.setText(String.valueOf((mearr.get(position).docfee)));
                 tv3.setText(String.valueOf((mearr.get(position).trans)));
                 tv4.setText(String.valueOf((mearr.get(position).medexp)));
                 tv5.setText(String.valueOf((mearr.get(position).other)));
-                tv6.setText(String.valueOf(amt));
+                tv6.setText(String.valueOf(mearr.get(position).tamt));
                 see.show();
                 close.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -173,6 +180,8 @@ public class meRecycleView extends RecyclerView.Adapter<meRecycleView.meViewHold
                                     mnr.other=0;
                                 else
                                     mnr.other=Integer.parseInt(String.valueOf(others.getText()));
+                                Date d1 = new Date();
+                                mnr.date = new SimpleDateFormat("yyyy-MM-dd").format(d1);
                                 medb db = new medb(v.getContext());
                                 db.updateMeRecord(mnr, Id);
                                 editMeRecord.dismiss();
@@ -208,5 +217,30 @@ public class meRecycleView extends RecyclerView.Adapter<meRecycleView.meViewHold
         });
         popupMenu.show();
     }
-
+    public void filterList(ArrayList<meNewRecord> mes){
+        mearr=mes;
+        notifyDataSetChanged();
+    }
+    public void filter(String text){
+        ArrayList<meNewRecord> newmes=new ArrayList<>();
+        for (meNewRecord menr:mearr){
+            menr.tt();
+            if(menr.date.toLowerCase().contains(text.toLowerCase().trim())){
+                newmes.add(menr);
+            } else if (menr.title.toLowerCase().toString().contains(text.toLowerCase())) {
+                newmes.add(menr);
+            }else if (String.valueOf(menr.docfee).toLowerCase().contains(text.toLowerCase())) {
+                newmes.add(menr);
+            }else if (String.valueOf(menr.trans).toLowerCase().contains(text.toLowerCase())) {
+                newmes.add(menr);
+            }else if (String.valueOf(menr.medexp).toLowerCase().contains(text.toLowerCase())) {
+                newmes.add(menr);
+            }else if (String.valueOf(menr.other).toLowerCase().contains(text.toLowerCase())) {
+                newmes.add(menr);
+            }else if (String.valueOf(menr.tamt).toLowerCase().contains(text.toLowerCase())) {
+                newmes.add(menr);
+            }
+        }
+        filterList(newmes);
+    }
 }

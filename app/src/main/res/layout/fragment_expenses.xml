@@ -4,8 +4,42 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.ExpensesFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="1dp"
+        android:id="@+id/me_ll"
+        >
+
+    <EditText
+        android:drawableLeft="@drawable/search_icon"
+        android:drawablePadding="2dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/me_search"
+        android:textSize="20sp"
+        android:layout_weight="1"
+        android:hint="Search Here"
+        android:layout_margin="2dp"
+        />
+        <ImageView
+            android:id="@+id/me_sort"
+            android:layout_margin="3dp"
+            android:layout_width="40dp"
+            android:layout_height="50dp"
+            android:src="@drawable/sort_image" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Analysis"
+            android:id="@+id/me_analysis"
+            />
+    </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
+        android:layout_below="@+id/me_ll"
         android:layout_height="match_parent"
         android:id="@+id/merecyclv"
         />

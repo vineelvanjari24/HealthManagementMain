@@ -24,12 +24,13 @@ public class medb extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE "+TABLENAME+"(Id Integer PRIMARY KEY AUTOINCREMENT,Title text,doctorFee Integer,MedicinesCost Integer,TransCost Integer,Others Integer)");
+        db.execSQL("CREATE TABLE "+TABLENAME+"(Id Integer PRIMARY KEY AUTOINCREMENT,Date text,Title text,doctorFee Integer,MedicinesCost Integer,TransCost Integer,Others Integer)");
     }
 
     public void addRecord(meNewRecord mnr){
         SQLiteDatabase db=this.getReadableDatabase();
         ContentValues cv=new ContentValues();
+        cv.put("Date",mnr.date);
         cv.put("Title",mnr.title);
         cv.put("doctorFee",mnr.docfee);
         cv.put("MedicinesCost",mnr.medexp);
@@ -44,11 +45,12 @@ public class medb extends SQLiteOpenHelper {
         Cursor cur=db.rawQuery("SELECT * FROM "+TABLENAME,null);
         while(cur.moveToNext()){
             meNewRecord mnr=new meNewRecord();
-            mnr.title=cur.getString(1);
-            mnr.docfee=cur.getInt(2);
-            mnr.medexp=cur.getInt(3);
-            mnr.trans=cur.getInt(4);
-            mnr.other=cur.getInt(5);
+            mnr.date=cur.getString(1);
+            mnr.title=cur.getString(2);
+            mnr.docfee=cur.getInt(3);
+            mnr.medexp=cur.getInt(4);
+            mnr.trans=cur.getInt(5);
+            mnr.other=cur.getInt(6);
             arr.add(mnr);
         }
         return arr;
@@ -81,9 +83,28 @@ public class medb extends SQLiteOpenHelper {
     db.delete(TABLENAME,"Id=?",new String[]{String.valueOf(id)});
     }
 
+    public ArrayList<meNewRecord> analyzeRecords(String searchstring){
+        ArrayList<meNewRecord> arr=new ArrayList<>();
+        SQLiteDatabase db=this.getWritableDatabase();
+        String query="SELECT * FROM "+TABLENAME+" WHERE Date LIKE '"+searchstring+"%'";
+        Cursor cur=db.rawQuery(query,null);
+        while(cur.moveToNext()){
+            meNewRecord mnr=new meNewRecord();
+            mnr.date=cur.getString(1);
+            mnr.title=cur.getString(2);
+            mnr.docfee=cur.getInt(3);
+            mnr.medexp=cur.getInt(4);
+            mnr.trans=cur.getInt(5);
+            mnr.other=cur.getInt(6);
+            arr.add(mnr);
+        }
+        return arr;
+    }
+
     public void updateMeRecord(meNewRecord mnr,int id) {
         SQLiteDatabase db=this.getWritableDatabase();
         ContentValues cv=new ContentValues();
+        cv.put("Date",mnr.date);
         cv.put("Title",mnr.title);
         cv.put("doctorFee",mnr.docfee);
         cv.put("MedicinesCost",mnr.medexp);
