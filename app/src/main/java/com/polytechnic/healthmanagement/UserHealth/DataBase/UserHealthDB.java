@@ -33,7 +33,6 @@ public class UserHealthDB extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create table "+TABLE_NAME+" (" +ID+ " integer primary key autoincrement ,"  +ISSUE+ " text ,"+DESCRIPTION +" text ,"+PROBLEM_RELATED_TO+" text ,"+ CREATED_DATE+" text , "+EDITED_DATE+" text "+ ")");
     }
-
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS "+TABLE_NAME);
