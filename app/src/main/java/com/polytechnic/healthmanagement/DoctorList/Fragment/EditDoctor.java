@@ -37,7 +37,7 @@ public class EditDoctor extends AppCompatActivity {
     CollectionReference docref=db.collection("Doctors");
     public StorageReference strref= FirebaseStorage.getInstance().getReference("uploads");
     Button save,cancel;
-    TextView name,exp,spec,work,des;
+    TextView name,exp,spec,work,des,website;
     ImageView img;
     Doctor editDoc=new Doctor();
     @Override
@@ -53,6 +53,7 @@ public class EditDoctor extends AppCompatActivity {
         editDoc.imgUri=intent.getStringExtra("Img");
         editDoc.work=intent.getStringExtra("Work");
         editDoc.Id=intent.getStringExtra("Id");
+        editDoc.website=intent.getStringExtra("Website");
 
         registerResult();
 
@@ -63,6 +64,7 @@ public class EditDoctor extends AppCompatActivity {
         spec=findViewById(R.id.edoc_spec);
         work=findViewById(R.id.edoc_work);
         des=findViewById(R.id.edoc_desc);
+        website=findViewById(R.id.edit_doc_website);
         img=findViewById(R.id.edoc_img);
 
         img.setOnClickListener(view->pickImg());
@@ -70,7 +72,9 @@ public class EditDoctor extends AppCompatActivity {
         spec.setText(editDoc.spec);
         work.setText(editDoc.work);
         des.setText(editDoc.desc);
+        website.setText(editDoc.website);
         exp.setText(String.valueOf(editDoc.exp));
+
         Picasso.get().load(editDoc.imgUri).into(img);
 
         cancel.setOnClickListener(new View.OnClickListener() {
@@ -89,6 +93,7 @@ public class EditDoctor extends AppCompatActivity {
                 d.spec=spec.getText().toString();
                 d.work=work.getText().toString();
                 d.desc=des.getText().toString();
+                d.website=website.getText().toString();
                 uploadFile(d);
                 ContentResolver cR=v.getContext().getContentResolver();
                 Uri delimguri = Uri.parse(editDoc.imgUri);

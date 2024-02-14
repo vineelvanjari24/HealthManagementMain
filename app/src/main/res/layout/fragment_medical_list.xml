@@ -5,7 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".medicallist.MainActivity">
+
+    <EditText
+        android:id="@+id/ml_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/_18sdp"
+        android:padding="10dp"
+        android:hint="Search Here"
+        android:drawableLeft="@drawable/search_icon"
+        />
+
     <TableLayout
+        android:layout_below="@+id/ml_search"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >

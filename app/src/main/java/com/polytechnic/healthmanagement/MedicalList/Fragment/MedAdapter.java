@@ -156,4 +156,8 @@ public class MedAdapter extends RecyclerView.Adapter<MedAdapter.MedViewHolder> {
         });
         popupMenu.show();
     }
+    public void filterList(ArrayList<Medicine> arrs){
+        mlistarr=arrs;
+        notifyDataSetChanged();
+    }
 }

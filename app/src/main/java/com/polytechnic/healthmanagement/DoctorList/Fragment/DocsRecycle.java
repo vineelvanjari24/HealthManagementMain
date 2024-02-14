@@ -25,6 +25,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.polytechnic.healthmanagement.MedicalList.Fragment.Medicine;
 import com.polytechnic.healthmanagement.R;
 import com.squareup.picasso.Picasso;
 
@@ -68,12 +69,22 @@ public class DocsRecycle extends RecyclerView.Adapter<DocsRecycle.DocsViewHolder
                 ImageView close=docdet.findViewById(R.id.doc_det_close);
                 Button del=docdet.findViewById(R.id.doc_det_delete);
                 Button edit=docdet.findViewById(R.id.doc_det_edit);
+                Button ws=docdet.findViewById(R.id.doc_det_website);
                 Picasso.get().load(d.get(position).imgUri).into(docimg);
                 name.setText(d.get(position).name);
                 sp.setText(d.get(position).spec);
                 ex.setText(String.valueOf(d.get(position).exp));
                 wk.setText(d.get(position).work);
                 de.setText(d.get(position).desc);
+
+                ws.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent=new Intent(Intent.ACTION_VIEW, Uri.parse(d.get(position).website));
+                        ct.startActivity(intent);
+                    }
+                });
+
                 del.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -138,6 +149,7 @@ public class DocsRecycle extends RecyclerView.Adapter<DocsRecycle.DocsViewHolder
                                 intent.putExtra("Work",d.get(position).work);
                                 intent.putExtra("Exp",d.get(position).exp);
                                 intent.putExtra("Id",d.get(position).Id);
+                                intent.putExtra("Website",d.get(position).website);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 ct.startActivity(intent);
                     }
@@ -167,5 +179,9 @@ public class DocsRecycle extends RecyclerView.Adapter<DocsRecycle.DocsViewHolder
             cv=itemView.findViewById(R.id.doc_list_cv);
             img=itemView.findViewById(R.id.list_img);
         }
+    }
+    public void filterList(ArrayList<Doctor> arrs){
+        d=arrs;
+        notifyDataSetChanged();
     }
 }

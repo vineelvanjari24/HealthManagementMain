@@ -3,6 +3,9 @@ package com.polytechnic.healthmanagement.MedicalList.Fragment;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,10 +37,11 @@ import java.util.ArrayList;
 public class MedicalListFragment extends Fragment {
     CollectionReference cref= FirebaseFirestore.getInstance().collection("MedicalList");
     ArrayList<Medicine> mlarr=new ArrayList<>();
+    MedAdapter medadpt;
     RecyclerView mlrv;
     FloatingActionButton mlfbtn;
     Button save,cancel;
-    EditText cn,cf,md;
+    EditText cn,cf,md,search;
     Context context;
     public MedicalListFragment() {
         // Required empty public constructor
@@ -53,7 +57,35 @@ public class MedicalListFragment extends Fragment {
 
         mlrv=view.findViewById(R.id.ml_rv);
         mlfbtn=view.findViewById(R.id.mlfbtn);
+        search=view.findViewById(R.id.ml_search);
 
+        search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {filter(s.toString());
+            }
+        });
+        search.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
+                    search.clearFocus();
+                    search.setText("");
+                    onStart();
+                    return true;
+                }
+                return false;
+            }
+        });
 
         mlfbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,11 +152,24 @@ public class MedicalListFragment extends Fragment {
                         newmedicine.Id= qd.getId();
                         mlarr.add(newmedicine);
                     }
-                    MedAdapter medadpt=new MedAdapter(context,mlarr);
+                    medadpt=new MedAdapter(context,mlarr);
                     mlrv.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false));
                     mlrv.setAdapter(medadpt);
                 }
             }
         });
+    }
+    public void filter(String text){
+        ArrayList<Medicine> newmelist=new ArrayList<>();
+        for (Medicine medic:mlarr){
+            if(medic.cn.toLowerCase().contains(text.toLowerCase().trim())){
+                newmelist.add(medic);
+            } else if (medic.med.toString().contains(text.toLowerCase())) {
+                newmelist.add(medic);
+            } else if (medic.cf.toString().contains(text.toLowerCase())) {
+                newmelist.add(medic);
+            }
+        }
+        medadpt.filterList(newmelist);
     }
 }

@@ -48,6 +48,7 @@ public class TrackYourHealthFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View View= inflater.inflate(R.layout.fragment_track_your_health, container, false);
+
         rv=View.findViewById(R.id.tyh_main_rv);
         fbtn=View.findViewById(R.id.tyh_main_floatbtn);
         search=View.findViewById(R.id.tyh_search);
