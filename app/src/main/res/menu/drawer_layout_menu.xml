@@ -24,9 +24,5 @@
         android:title="Expenses"
         android:icon="@drawable/alerts_logo"
         />
-    <item
-        android:id="@+id/visitExperience"
-        android:title="Visit Experience"
-        android:icon="@drawable/alerts_logo"
-        />
+
 </menu>

@@ -70,9 +70,7 @@ public class MainActivity extends AppCompatActivity {
                 else if (id==R.id.expenses) {
                     loadFragment(new ExpensesFragment(),false,"ExpensesFragmentTag");
                 }
-                else if (id==R.id.visitExperience) {
-                    loadFragment(new VisitExperienceFragment(),false,"VisitExperienceFragmentTag");
-                }
+
 
                 drawerLayout.closeDrawer(GravityCompat.START);
 
