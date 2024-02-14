@@ -11,6 +11,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,6 +53,7 @@ import com.google.firebase.storage.UploadTask;
 import com.polytechnic.healthmanagement.DoctorList.DoctorDB;
 import com.polytechnic.healthmanagement.DoctorList.DoctorActivity;
 import com.polytechnic.healthmanagement.DoctorList.RecycleView.DoctorAdapter;
+import com.polytechnic.healthmanagement.MedicalList.Fragment.Medicine;
 import com.polytechnic.healthmanagement.R;
 import com.polytechnic.healthmanagement.UserHealth.RecycleView.UserHealthAdapter;
 
@@ -60,8 +64,9 @@ public class DoctorListFragment extends Fragment {
     private ActivityResultLauncher<Intent> gallerylauncher;
     RecyclerView rv;
     FloatingActionButton fbtn;
-    EditText name,exp,spec,work,des;
+    EditText name,exp,spec,work,des,search,website;
     Button save,cancel;
+    DocsRecycle dr;
     ImageView img;
     //Image Related
     public final int GALLERY_REQUEST_CODE=1000;
@@ -86,45 +91,6 @@ public class DoctorListFragment extends Fragment {
         // Inflate the layout for this fragment
         View view =inflater.inflate(R.layout.fragment_doctor_list, container, false);
 
-//        RelativeLayout relativeLayout = view.view.findViewById(R.id.relativeLayout);
-//        CardView add =view.view.findViewById(R.id.addDoctorList);
-//        if(resource.equals("fromMainActivity")){
-//            Toast.makeText(context, "MainActivity", Toast.LENGTH_SHORT).show();
-//            relativeLayout.removeView(add);
-//            doctorAdapter = new DoctorAdapter(context,"fromMainActivity");
-//        }
-//        else if(resource.equals("fromAdmin")){
-//            Toast.makeText(context, "Admin", Toast.LENGTH_SHORT).show();
-//            add.setOnClickListener(vv ->{
-//                Intent intent = new Intent(context, DoctorActivity.class);
-//                doctorAdapter = new DoctorAdapter(context,"fromMainActivity");
-//                startActivityForResult(intent, ADD_ITEM_REQUEST);
-//                doctorAdapter = new DoctorAdapter(context,"fromAdmin");
-//            });
-//
-//        } else if (resource.equals("fromUser")) {
-//            Toast.makeText(context, "user", Toast.LENGTH_SHORT).show();
-//            relativeLayout.removeView(add);
-//            doctorAdapter = new DoctorAdapter(context,"fromUser");
-//        }
-//
-//
-//         recyclerView  = view.view.findViewById(R.id.doctorListRecycleView);
-//        recyclerView.setLayoutManager(new LinearLayoutManager(context));
-//        SharedPreferences login = context.getSharedPreferences("login",MODE_PRIVATE);
-//        if(login.getBoolean("doctorList",true)){
-//            DoctorDB doctorDB = new DoctorDB(context);
-//            doctorDB.insert("vignesh","doctor since 2010 ","Cardiologists","14","Yoshada","Malaria");
-//            doctorDB.insert("akber","doctor since 2010 ","Cardiologists","14","Yoshada","Malaria");
-//            doctorDB.insert("varun","doctor since 2010 ","Cardiologists","14","Yoshada","Malaria");
-//            doctorDB.insert("sruthilaya","doctor since 2010 ","Cardiologists","14","Yoshada","Malaria");
-//            doctorDB.insert("vineel","doctor since 2010 ","Cardiologists","14","Yoshada","Malaria");
-//            SharedPreferences.Editor edit = login.edit();
-//            edit.putBoolean("doctorList",false);
-//            edit.apply();
-//        }
-//        recyclerView.setAdapter(doctorAdapter);
-
         fbtn=view.findViewById(R.id.doc_fbtn);
         rv=view.findViewById(R.id.rv);
         registerResult();
@@ -138,7 +104,32 @@ public class DoctorListFragment extends Fragment {
         work=newDoc.findViewById(R.id.doc_work);
         des=newDoc.findViewById(R.id.doc_desc);
         img=newDoc  .findViewById(R.id.doc_img);
+        website=newDoc.findViewById(R.id.doc_website);
 
+        search=view.findViewById(R.id.dl_search);
+        search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+            @Override
+            public void afterTextChanged(Editable s) {filter(s.toString());
+            }
+        });
+        search.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
+                    search.clearFocus();
+                    search.setText("");
+                    onStart();
+                    return true;
+                }
+                return false;
+            }
+        });
         fbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -146,6 +137,7 @@ public class DoctorListFragment extends Fragment {
                 exp.setText("");
                 des.setText("");
                 work.setText("");
+                website.setText("");
                 spec.setText("");
                 spec.clearFocus();
                 img.setImageResource(R.drawable.img);
@@ -167,6 +159,7 @@ public class DoctorListFragment extends Fragment {
                         d.spec=spec.getText().toString();
                         d.work=work.getText().toString();
                         d.desc=des.getText().toString();
+                        d.website=website.getText().toString();
                         uploadFile(d);
                     }
                 });
@@ -262,11 +255,22 @@ public class DoctorListFragment extends Fragment {
                         d.Id = ds.getId();
                         docs.add(d);
                     }
-                    DocsRecycle dr = new DocsRecycle(docs, context);
+                    dr = new DocsRecycle(docs, context);
                     rv.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
                     rv.setAdapter(dr);
                 }
             }
         });
+    }
+    public void filter(String text){
+        ArrayList<Doctor> newdoclist=new ArrayList<>();
+        for (Doctor doc:docs){
+            if(doc.name.toLowerCase().contains(text.toLowerCase().trim())){
+                newdoclist.add(doc);
+            } else if (doc.spec.toString().contains(text.toLowerCase())) {
+                newdoclist.add(doc);
+            }
+        }
+        dr.filterList(newdoclist);
     }
 }

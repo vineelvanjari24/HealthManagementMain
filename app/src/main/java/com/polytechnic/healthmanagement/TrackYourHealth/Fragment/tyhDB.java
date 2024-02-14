@@ -14,7 +14,17 @@ import com.polytechnic.healthmanagement.TrackYourHealth.Model.TYHTable;
 import java.util.ArrayList;
 
 public class tyhDB extends SQLiteOpenHelper {
-    private static final String DBNAME="AilmentsDB";
+    //
+    private  static  String TABLE_NAME="USerHealthTable";
+    private static  String ID="id";
+    private  static  String ISSUE="Issue";
+    private  static  String DESCRIPTION="Description";
+    private  static  String PROBLEM_RELATED_TO="ProblemRelatedTo";
+    private  static  String CREATED_DATE="CreatedDate";
+    private  static  String EDITED_DATE="EditedDate";
+
+    //
+    private static final String DBNAME="UserHealthDB";
     private static final int DBVERSION=1;
     public static final String TABLENAME="AilmentsList";
 
@@ -29,6 +39,7 @@ public class tyhDB extends SQLiteOpenHelper {
         db.execSQL(q);
         q="CREATE TABLE datacopy(ID Integer,ParaOne text,ParaTwo text)";
         db.execSQL(q);
+        db.execSQL("create table "+TABLE_NAME+" (" +ID+ " integer primary key autoincrement ,"  +ISSUE+ " text ,"+DESCRIPTION +" text ,"+PROBLEM_RELATED_TO+" text ,"+ CREATED_DATE+" text , "+EDITED_DATE+" text "+ ")");
     }
 
     public void addAilment(TYHTable na)

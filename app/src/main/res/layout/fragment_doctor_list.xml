@@ -5,9 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="20dp">
+    android:padding="10dp">
+
+    <EditText
+        android:id="@+id/dl_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/_18sdp"
+        android:padding="10dp"
+        android:hint="Search Here"
+        android:drawableLeft="@drawable/search_icon"
+        />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:layout_below="@+id/dl_search"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/rv"

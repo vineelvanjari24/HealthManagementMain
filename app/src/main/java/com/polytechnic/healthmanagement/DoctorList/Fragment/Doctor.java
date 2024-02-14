@@ -11,4 +11,5 @@ public class Doctor {
     public String spec;
     public String work;
     public String desc;
+    public String website;
 }
