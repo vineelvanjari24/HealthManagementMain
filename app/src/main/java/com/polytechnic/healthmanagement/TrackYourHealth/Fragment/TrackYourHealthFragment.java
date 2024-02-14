@@ -137,6 +137,9 @@ public class TrackYourHealthFragment extends Fragment {
                 }  else if (!p2.getText().toString().isEmpty() && Character.isDigit(p2.getText().toString().trim().charAt(0))){
                     newAilment.dismiss();
                     Toast.makeText(v.getContext(), "Parameter Name should not start with numbers", Toast.LENGTH_SHORT).show();
+                }else if (p2.getText().toString().trim().equals(p1.getText().toString().trim())){
+                    newAilment.dismiss();
+                    Toast.makeText(v.getContext(), "Parameters should be different", Toast.LENGTH_SHORT).show();
                 }
                 else {
                     t.P1 = p1.getText().toString().trim().replaceAll(" ", "_");
