@@ -17,6 +17,7 @@ public class tyhDB extends SQLiteOpenHelper {
     private static final String DBNAME="AilmentsDB";
     private static final int DBVERSION=1;
     public static final String TABLENAME="AilmentsList";
+
     public tyhDB(@Nullable Context context) {
         super(context, DBNAME, null, DBVERSION);
     }

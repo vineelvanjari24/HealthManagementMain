@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:padding="10dp">
     <GridLayout
@@ -49,17 +50,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="10dp"
-        android:gravity="center"
-        android:layout_marginTop="20dp">
-
+        >
         <Button
             android:id="@+id/tyh_Ailment_Dialog_cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Cancel"
+            android:padding="@dimen/_10sdp"
             android:layout_weight="1"
-            android:textSize="24sp"
+            android:layout_margin="@dimen/_10sdp"
+            app:cornerRadius="@dimen/_5sdp"
+            android:textSize="@dimen/_14sdp"
             />
 
         <Button
@@ -67,12 +68,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Save"
-
+            android:padding="@dimen/_10sdp"
+            android:layout_margin="@dimen/_10sdp"
             android:layout_weight="1"
-            android:textSize="24sp"
-            android:layout_alignParentRight="true"
+            android:textSize="@dimen/_14sdp"
+            app:cornerRadius="@dimen/_5sdp"
             />
-
     </LinearLayout>
 
 </LinearLayout>

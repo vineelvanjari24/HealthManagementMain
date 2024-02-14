@@ -15,7 +15,19 @@
         android:theme="@style/Theme.HealthManagement"
         tools:targetApi="31">
         <activity
+            android:name=".SplashScreen"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".Expenses.Fragment.MEAnalysis"
+            android:exported="false" />
+        <activity
+            android:name=".UserLogin.LoginPage"
             android:exported="false" />
         <activity
             android:name=".Admin.AdminMainActivity"
@@ -24,13 +36,9 @@
             android:name=".UserLogin.RegisterUser"
             android:exported="false" />
         <activity
-            android:name=".UserLogin.Login"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:name=".UserLogin.AdminLogin"
+            android:exported="false">
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".DoctorList.DoctorActivity"

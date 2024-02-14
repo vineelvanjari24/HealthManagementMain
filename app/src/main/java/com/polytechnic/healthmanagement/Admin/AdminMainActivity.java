@@ -14,7 +14,8 @@ import android.view.MenuItem;
 
 import com.google.android.material.tabs.TabLayout;
 import com.polytechnic.healthmanagement.R;
-import com.polytechnic.healthmanagement.UserLogin.Login;
+import com.polytechnic.healthmanagement.UserLogin.AdminLogin;
+import com.polytechnic.healthmanagement.UserLogin.LoginPage;
 
 public class AdminMainActivity extends AppCompatActivity {
     private Toolbar toolbar;
@@ -48,8 +49,7 @@ public class AdminMainActivity extends AppCompatActivity {
             edit.putBoolean("user",false);
             edit.putBoolean("admin",false);
             edit.apply();
-            Intent intent = new Intent(this, Login.class);
-            intent.putExtra("flag",false);
+            Intent intent = new Intent(this, LoginPage.class);
             startActivity(intent);
             finish();
         }

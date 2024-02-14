@@ -13,7 +13,7 @@ import com.polytechnic.healthmanagement.UserHealth.Model.UserHealthModel;
 import java.util.ArrayList;
 
 public class UserHealthDB extends SQLiteOpenHelper {
-    private  static  String DATABASE_NAME="UserHealthDB";
+    private  static  String DATABASE_NAME="AilmentsDB";
     private  static  String TABLE_NAME="USerHealthTable";
     private static  String ID="id";
     private  static  String ISSUE="Issue";
@@ -26,7 +26,6 @@ public class UserHealthDB extends SQLiteOpenHelper {
 
 
     public UserHealthDB(@Nullable Context context) {
-
         super(context, DATABASE_NAME, null, 1);
     }
 
@@ -91,28 +90,4 @@ public class UserHealthDB extends SQLiteOpenHelper {
        else
            return false;
     }
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

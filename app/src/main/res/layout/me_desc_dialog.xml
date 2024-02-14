@@ -40,14 +40,14 @@
                     android:padding="@dimen/_3sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/_20sdp"
+                    android:textSize="@dimen/_14sdp"
                     android:text="Title : "
                     />
                 <TextView
                     android:padding="@dimen/_3sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/_20sdp"
+                    android:textSize="@dimen/_14sdp"
                     android:text="title"
                     android:id="@+id/me_desc_dialog_tv1"
                     />
@@ -63,14 +63,14 @@
                     android:padding="@dimen/_3sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/_20sdp"
+                    android:textSize="@dimen/_14sdp"
                     android:text="Doctor's Fee : "
                     />
                 <TextView
                     android:padding="@dimen/_3sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/_20sdp"
+                    android:textSize="@dimen/_14sdp"
                     android:text="docfee"
                     android:id="@+id/me_desc_dialog_tv2"
                     />
@@ -86,15 +86,15 @@
                     android:padding="@dimen/_3sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/_20sdp"
+                    android:textSize="@dimen/_14sdp"
                     android:text="Transportation Charges : "
                     />
                 <TextView
                     android:padding="@dimen/_3sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/_20sdp"
-                    android:text="Trans charges"
+                    android:textSize="@dimen/_14sdp"
+                    android:text="100"
                     android:id="@+id/me_desc_dialog_tv3"
                     />
             </LinearLayout>
@@ -109,14 +109,14 @@
                     android:padding="@dimen/_3sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/_20sdp"
+                    android:textSize="@dimen/_14sdp"
                     android:text="Medicines Cost : "
                     />
                 <TextView
                     android:padding="@dimen/_3sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/_20sdp"
+                    android:textSize="@dimen/_14sdp"
                     android:text="med"
                     android:id="@+id/me_desc_dialog_tv4"
                     />
@@ -132,14 +132,14 @@
                     android:padding="@dimen/_3sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/_20sdp"
+                    android:textSize="@dimen/_14sdp"
                     android:text="Other Charges : "
                     />
                 <TextView
                     android:padding="@dimen/_3sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/_20sdp"
+                    android:textSize="@dimen/_14sdp"
                     android:text="others"
                     android:id="@+id/me_desc_dialog_tv5"
                     />
@@ -155,14 +155,14 @@
                     android:padding="@dimen/_3sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/_20sdp"
+                    android:textSize="@dimen/_14sdp"
                     android:text="Total Amount : "
                     />
                 <TextView
                     android:padding="@dimen/_3sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/_20sdp"
+                    android:textSize="@dimen/_14sdp"
                     android:text="amount"
                     android:id="@+id/me_desc_dialog_tv6"
                     />

@@ -15,9 +15,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 import com.polytechnic.healthmanagement.TrackYourHealth.Fragment.TrackYourHealthFragment;
@@ -25,7 +23,8 @@ import com.polytechnic.healthmanagement.Expenses.Fragment.ExpensesFragment;
 import com.polytechnic.healthmanagement.MedicalList.Fragment.MedicalListFragment;
 import com.polytechnic.healthmanagement.DoctorList.Fragment.DoctorListFragment;
 import com.polytechnic.healthmanagement.UserHealth.Fragment.UserHealthFragment;
-import com.polytechnic.healthmanagement.UserLogin.Login;
+import com.polytechnic.healthmanagement.UserLogin.AdminLogin;
+import com.polytechnic.healthmanagement.UserLogin.LoginPage;
 import com.polytechnic.healthmanagement.VisitExperience.Fragment.VisitExperienceFragment;
 
 
@@ -121,8 +120,7 @@ public class MainActivity extends AppCompatActivity {
             edit.putBoolean("user",false);
             edit.putBoolean("admin",false);
             edit.apply();
-            Intent intent = new Intent(this, Login.class);
-            intent.putExtra("flag",true);
+            Intent intent = new Intent(this, LoginPage.class);
             startActivity(intent);
             finish();
         }

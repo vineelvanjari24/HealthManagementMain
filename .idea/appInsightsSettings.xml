@@ -27,10 +27,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="com.polytechnic.healthmanagement" />
-                  <option name="mobileSdkAppId" value="1:1083469459122:android:c7f0a20c356dd2ddbfa3ab" />
-                  <option name="projectId" value="healthmanagement-9fff5" />
-                  <option name="projectNumber" value="1083469459122" />
+                  <option name="appId" value="PLACEHOLDER" />
+                  <option name="mobileSdkAppId" value="" />
+                  <option name="projectId" value="" />
+                  <option name="projectNumber" value="" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

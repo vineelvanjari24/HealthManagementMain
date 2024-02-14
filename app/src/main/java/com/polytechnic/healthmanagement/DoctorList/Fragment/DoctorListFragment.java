@@ -128,7 +128,7 @@ public class DoctorListFragment extends Fragment {
         fbtn=view.findViewById(R.id.doc_fbtn);
         rv=view.findViewById(R.id.rv);
         registerResult();
-        Dialog newDoc=new Dialog(context);
+        Dialog newDoc=new Dialog(context,R.style.Dialogbox_border);
         newDoc.setContentView(R.layout.add_doctor);
         save=newDoc.findViewById(R.id.doc_save);
         cancel=newDoc.findViewById(R.id.doc_cancel);

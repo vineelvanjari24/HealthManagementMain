@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UserLogin.Login"
+    tools:context=".UserLogin.AdminLogin"
     android:id="@+id/constraintLayout"
 >
     <ImageView
@@ -18,19 +18,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"/>
-
-    <TextView
-        android:id="@+id/changeTV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Admin"
-        android:textSize="@dimen/_14sdp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/cardView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.956"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
@@ -67,7 +54,7 @@
                       android:layout_width="match_parent"
                       android:layout_height="match_parent"
                       android:layout_marginTop="@dimen/_10sdp"
-                      android:src="@drawable/doctor" />
+                      android:src="@drawable/admin" />
               </androidx.cardview.widget.CardView>
 
           </LinearLayout>
@@ -77,7 +64,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:text="LOGIN"
+                android:text="ADMIN LOGIN"
                 android:textAlignment="center"
                 android:textSize="@dimen/_30sdp"
                 android:textStyle="bold" />
@@ -88,7 +75,7 @@
                 android:layout_margin="@dimen/_15sdp"
                 app:boxCornerRadiusBottomEnd="50dp"
                 app:boxCornerRadiusBottomStart="50dp"
-                android:hint="EMAIL ID"
+                android:hint="ADMIN ID"
                 app:boxCornerRadiusTopEnd="50dp"
                 app:boxCornerRadiusTopStart="50dp"
                 app:startIconDrawable="@drawable/account_circle"
@@ -116,9 +103,7 @@
                 app:boxCornerRadiusTopEnd="50dp"
                 app:boxCornerRadiusTopStart="50dp"
                 app:passwordToggleEnabled="true"
-                app:startIconDrawable="@drawable/lock"
->
-
+                app:startIconDrawable="@drawable/lock">
                 <EditText
                     android:id="@+id/password"
                     android:layout_width="match_parent"
@@ -141,28 +126,5 @@
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
-        app:layout_constraintTop_toBottomOf="@+id/cardView">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Don't have an account ? "
-            android:textColor="@color/white"
-            android:textSize="@dimen/_14sdp" />
-
-        <TextView
-            android:id="@+id/register"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Register"
-            android:textSize="@dimen/_20sdp"
-            android:textColor="@color/white"
-            android:textStyle="bold" />
-    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

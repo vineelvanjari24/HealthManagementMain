@@ -2,68 +2,92 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:padding="10dp">
-
-    <TextView
-        android:layout_width="match_parent"
+    <GridLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:text="Chemical Name : "
-        />
+        android:columnCount="2"
+        >
+        <TextView
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="wrap_content"
+            android:text="Chemical Name :"
+            android:textSize="@dimen/_14sdp"
+            />
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="wrap_content"
+            android:hint="Chemical Name ">
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/_14sdp"
+                android:id="@+id/ml_edit_cn"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+        <TextView
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="wrap_content"
+            android:text="Medicines :"
+            android:textSize="@dimen/_14sdp"
+            />
 
-        <EditText
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="wrap_content"
+            android:hint="Medicines">
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/_14sdp"
+                android:id="@+id/ml_edit_med"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+        <TextView
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="wrap_content"
+            android:text="Chemical Formula :"
+            android:textSize="@dimen/_14sdp"
+            />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="wrap_content"
+            android:hint="Chemical Formula">
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/_14sdp"
+                android:id="@+id/ml_edit_cf"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+    </GridLayout>
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:id="@+id/ml_edit_cn"
-            android:hint="Enter Chemical Name"
-            />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:text="Medicines : "
-        />
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:id="@+id/ml_edit_med"
-        android:hint="Enter Medicines"
-        />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:text="Chemical Formula : "
-        />
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:id="@+id/ml_edit_cf"
-        android:hint="Enter Chemical Formula"
-        />
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp">
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Save"
-        android:layout_alignParentRight="true"
-        android:id="@+id/ml_save"
-        android:textSize="20sp"
-        />
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Cancel"
-        android:id="@+id/ml_cancel"
-        android:textSize="20sp"
-        />
-    </RelativeLayout>
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/ml_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cancel"
+                android:padding="@dimen/_10sdp"
+                android:layout_weight="1"
+                android:layout_margin="@dimen/_10sdp"
+                app:cornerRadius="@dimen/_5sdp"
+                android:textSize="@dimen/_14sdp"/>
+            <Button
+                android:id="@+id/ml_save"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Save"
+                android:padding="@dimen/_10sdp"
+                android:layout_margin="@dimen/_10sdp"
+                android:layout_weight="1"
+                android:textSize="@dimen/_14sdp"
+                app:cornerRadius="@dimen/_5sdp"/>
+        </LinearLayout>
 </LinearLayout>
