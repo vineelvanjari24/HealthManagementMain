@@ -13,4 +13,9 @@
     <color name="dm">#5044FF</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
+    <color name="cyan">#00BCD4</color>
+    <color name="spec">#00A3FA</color>
+    <color name="btn">#0BF689</color>
+    <color name="inactive">#7F0A8F</color>
+    <color name="active">#A9B8B4</color>
 </resources>
