@@ -15,7 +15,6 @@ import java.util.ArrayList;
 
 public class tyhDB extends SQLiteOpenHelper {
     //
-    private  static  String TABLE_NAME="USerHealthTable";
     private static  String ID="id";
     private  static  String ISSUE="Issue";
     private  static  String DESCRIPTION="Description";
@@ -24,7 +23,7 @@ public class tyhDB extends SQLiteOpenHelper {
     private  static  String EDITED_DATE="EditedDate";
 
     //
-    private static final String DBNAME="UserHealthDB";
+    private static final String DBNAME="HealthHubDB";
     private static final int DBVERSION=1;
     public static final String TABLENAME="AilmentsList";
     public tyhDB(@Nullable Context context) {
@@ -38,7 +37,9 @@ public class tyhDB extends SQLiteOpenHelper {
         db.execSQL(q);
         q="CREATE TABLE datacopy(ID Integer,ParaOne text,ParaTwo text)";
         db.execSQL(q);
-        db.execSQL("create table "+TABLE_NAME+" (" +ID+ " integer primary key autoincrement ,"  +ISSUE+ " text ,"+DESCRIPTION +" text ,"+PROBLEM_RELATED_TO+" text ,"+ CREATED_DATE+" text , "+EDITED_DATE+" text "+ ")");
+        db.execSQL("create table USerHealthTable (" +ID+ " integer primary key autoincrement ,"  +ISSUE+ " text ,"+DESCRIPTION +" text ,"+PROBLEM_RELATED_TO+" text ,"+ CREATED_DATE+" text , "+EDITED_DATE+" text "+ ")");
+        db.execSQL("CREATE TABLE ExpensesRecords(Id Integer PRIMARY KEY AUTOINCREMENT,Date text,Title text,doctorFee Integer,MedicinesCost Integer,TransCost Integer,Others Integer)");
+
     }
 
     public void addAilment(TYHTable na)
@@ -176,6 +177,8 @@ public class tyhDB extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS "+TABLENAME);
+        db.execSQL("DROP TABLE IF EXISTS USerHealthTable");
+        db.execSQL("DROP TABLE IF EXISTS ExpensesRecords");
         onCreate(db);
     }
 }
