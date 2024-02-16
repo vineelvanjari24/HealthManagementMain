@@ -19,20 +19,10 @@ public class SplashScreen extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {    //Handler is used run the thread after specified time finishes
             @Override
             public void run() {
-                Intent intent;
-                SharedPreferences login = getSharedPreferences("login",MODE_PRIVATE);
-                if(!login.getBoolean("user",false) && !login.getBoolean("admin",false)){
-                    intent = new Intent(SplashScreen.this, LoginPage.class);
-                }
-                else if(login.getBoolean("user",false)){
-                    intent = new Intent(SplashScreen.this, MainActivity.class);
-                }
-                else{
-                    intent = new Intent(SplashScreen.this, AdminMainActivity.class);
-                }
-                startActivity(intent);  //starts specified intent
-                finish();     //finish() finishes this activity
+                startActivity(new Intent(SplashScreen.this, OnBoardingTutorial.class));
+                finish();
             }
-        }, 1000);     //delayMillis is the milliseconds time the splash should be shown
-    }
+        }, 1000);
+        }
+
     }

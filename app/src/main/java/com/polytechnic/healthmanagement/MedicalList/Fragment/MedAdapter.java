@@ -29,9 +29,11 @@ public class MedAdapter extends RecyclerView.Adapter<MedAdapter.MedViewHolder> {
     Context ct;
     ArrayList<Medicine> mlistarr=new ArrayList<>();
     FirebaseFirestore db=FirebaseFirestore.getInstance();
-    public MedAdapter(Context c, ArrayList<Medicine> am){
+    String resource;
+    public MedAdapter(Context c, ArrayList<Medicine> am,String resource){
         ct=c;
         mlistarr=am;
+        this.resource = resource;
     }
     @NonNull
     @Override
@@ -48,7 +50,10 @@ public class MedAdapter extends RecyclerView.Adapter<MedAdapter.MedViewHolder> {
         holder.tbl.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                showMenu(v,mlistarr.get(position));
+                if(!resource.equals("fromMainActivity")){
+
+                    showMenu(v,mlistarr.get(position));
+                }
                 return true;
             }
         });

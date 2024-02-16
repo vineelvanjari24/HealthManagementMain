@@ -26,7 +26,6 @@ public class LoginPage extends AppCompatActivity {
 
         admin.setOnClickListener(v -> {
             Intent intentAdminLogin = new Intent(getApplicationContext(), AdminLogin.class);
-
             startActivity(intentAdminLogin);
             finish();
         });

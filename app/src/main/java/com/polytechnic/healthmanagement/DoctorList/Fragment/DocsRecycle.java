@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,9 +38,11 @@ public class DocsRecycle extends RecyclerView.Adapter<DocsRecycle.DocsViewHolder
     }
     ArrayList<Doctor> d;
     Context ct;
-    public DocsRecycle(ArrayList<Doctor> doc, Context c){
+    String resource;
+    public DocsRecycle(ArrayList<Doctor> doc, Context c,String resource){
         d=doc;
         this.ct=c;
+        this.resource=resource;
     }
     @NonNull
     @Override
@@ -60,7 +63,11 @@ public class DocsRecycle extends RecyclerView.Adapter<DocsRecycle.DocsViewHolder
                 Dialog docdet=new Dialog(v.getContext());
                 docdet.setContentView(R.layout.doc_details);
                 docdet.setCancelable(false);
-                ImageView docimg=docdet.findViewById(R.id.doc_det_img);
+                if(resource.equals("fromUser") || resource.equals("fromMainActivity")){
+                    LinearLayout layout = docdet.findViewById(R.id.layout);
+                    layout.setVisibility(View.GONE);
+                }
+                    ImageView docimg=docdet.findViewById(R.id.doc_det_img);
                 TextView name=docdet.findViewById(R.id.doc_det_name);
                 TextView sp=docdet.findViewById(R.id.doc_det_spec);
                 TextView wk=docdet.findViewById(R.id.doc_det_work);

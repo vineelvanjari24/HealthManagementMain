@@ -9,7 +9,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="SplashScreen"
-        android:textSize="@dimen/_100sdp"
+        android:text="Splash\nScreen"
+        android:textSize="@dimen/_80sdp"
         />
 </LinearLayout>
