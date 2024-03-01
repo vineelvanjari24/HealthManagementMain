@@ -3,9 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="@dimen/_10sdp"
-    app:cardElevation="@dimen/_10sdp"
-    android:layout_margin="5dp"
+    app:cardCornerRadius="@dimen/_5sdp"
+    app:cardElevation="@dimen/_5sdp"
+    android:layout_margin="@dimen/_5sdp"
     android:id="@+id/me_records_cardView">
 <LinearLayout
     android:layout_width="match_parent"
@@ -25,7 +25,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Date"
-        android:textSize="@dimen/_15sdp"
+        android:textAllCaps="true"
+        android:textSize="@dimen/_13sdp"
         />
     <TextView
         android:id="@+id/me_records_title"
@@ -46,8 +47,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Amount"
+        android:textAllCaps="true"
         android:textAlignment="textEnd"
-        android:textSize="@dimen/_15sdp"
+        android:textSize="@dimen/_13sdp"
         android:layout_marginRight="@dimen/_5sdp"
         />
     <TextView

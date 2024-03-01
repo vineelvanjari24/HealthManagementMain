@@ -19,6 +19,7 @@ import androidx.appcompat.widget.PopupMenu;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.polytechnic.healthmanagement.R;
@@ -161,8 +162,10 @@ public class AilmentsList extends RecyclerView.Adapter<AilmentsList.AilmentsView
 
                         return true;
                 } else if (title.equals("Delete")) {
-                    AlertDialog.Builder confirm=new AlertDialog.Builder(ct,R.style.Dialogbox_border);
+
+                    AlertDialog.Builder confirm=new AlertDialog.Builder(ct);
                     confirm.setTitle("Delete Confirmation");
+                    confirm.setIcon(R.drawable.delete);
                     confirm.setMessage("Do you want to delete for sure?");
                     confirm.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                         @Override
@@ -170,6 +173,7 @@ public class AilmentsList extends RecyclerView.Adapter<AilmentsList.AilmentsView
                              tyhDB db=new tyhDB(v.getContext());
                              db.deleteAilment(tb);
                              load(v.getContext());
+
                         }
                     });
                     confirm.setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -179,7 +183,6 @@ public class AilmentsList extends RecyclerView.Adapter<AilmentsList.AilmentsView
                         }
                     });
                     confirm.show();
-                    return true;
                 }
                     return true;
             }

@@ -16,6 +16,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -60,7 +63,7 @@ public class TrackYourHealthFragment extends Fragment {
             }
         });
 
-        Dialog newAilment=new Dialog(View.getContext());
+        Dialog newAilment=new Dialog(View.getContext(),R.style.Dialogbox_border);
         newAilment.setCancelable(false);
         newAilment.setContentView(R.layout.tyh_main_dialogbox);
         dcancel=newAilment.findViewById(R.id.tyh_main_dialog_cancel);
@@ -181,5 +184,14 @@ public class TrackYourHealthFragment extends Fragment {
             }
         });
         popupMenu.show();
+    }
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        // Assuming you have a reference to the hosting Activity
+        if (getActivity() != null) {
+            // Set the new title to the Toolbar in the hosting Activity
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Track your health");
+        }
     }
 }

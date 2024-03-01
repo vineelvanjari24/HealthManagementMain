@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -43,11 +44,13 @@ public class MedicalListFragment extends Fragment {
     Button save,cancel;
     EditText cn,cf,md,search;
     Context context;
+    String resource;
     public MedicalListFragment() {
         // Required empty public constructor
     }
-    public MedicalListFragment(Context context) {
+    public MedicalListFragment(Context context,String resource) {
         this.context=context;
+        this.resource=resource;
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -58,7 +61,8 @@ public class MedicalListFragment extends Fragment {
         mlrv=view.findViewById(R.id.ml_rv);
         mlfbtn=view.findViewById(R.id.mlfbtn);
         search=view.findViewById(R.id.ml_search);
-
+        if(resource.equals("fromMainActivity"))
+            mlfbtn.setVisibility(View.GONE);
         search.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -152,7 +156,7 @@ public class MedicalListFragment extends Fragment {
                         newmedicine.Id= qd.getId();
                         mlarr.add(newmedicine);
                     }
-                    medadpt=new MedAdapter(context,mlarr);
+                    medadpt=new MedAdapter(context,mlarr,resource);
                     mlrv.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false));
                     mlrv.setAdapter(medadpt);
                 }
@@ -171,5 +175,14 @@ public class MedicalListFragment extends Fragment {
             }
         }
         medadpt.filterList(newmelist);
+    }
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        // Assuming you have a reference to the hosting Activity
+        if (getActivity() != null) {
+            // Set the new title to the Toolbar in the hosting Activity
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Medical List");
+        }
     }
 }

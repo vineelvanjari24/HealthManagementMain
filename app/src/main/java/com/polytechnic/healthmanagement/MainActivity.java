@@ -25,7 +25,6 @@ import com.polytechnic.healthmanagement.DoctorList.Fragment.DoctorListFragment;
 import com.polytechnic.healthmanagement.UserHealth.Fragment.UserHealthFragment;
 import com.polytechnic.healthmanagement.UserLogin.AdminLogin;
 import com.polytechnic.healthmanagement.UserLogin.LoginPage;
-import com.polytechnic.healthmanagement.VisitExperience.Fragment.VisitExperienceFragment;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -65,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
                     loadFragment(new DoctorListFragment(MainActivity.this,"fromMainActivity"),false,"DoctorListFragmentTag");
                 }
                 else if (id==R.id.medicalList) {
-                    loadFragment(new MedicalListFragment(),false,"MedicalListFragmentTag");
+                    loadFragment(new MedicalListFragment(MainActivity.this,"fromMainActivity"),false,"MedicalListFragmentTag");
                 }
                 else if (id==R.id.expenses) {
                     loadFragment(new ExpensesFragment(),false,"ExpensesFragmentTag");

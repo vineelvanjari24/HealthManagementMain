@@ -25,7 +25,7 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
         {
             return  new DoctorListFragment(context,"fromAdmin");
         }else {
-            return  new MedicalListFragment(context);
+            return  new MedicalListFragment(context,"fromAdmin");
         }
     }
 

@@ -31,6 +31,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -92,6 +93,8 @@ public class DoctorListFragment extends Fragment {
         View view =inflater.inflate(R.layout.fragment_doctor_list, container, false);
 
         fbtn=view.findViewById(R.id.doc_fbtn);
+        if(resource.equals("fromUser") || resource.equals("fromMainActivity"))
+            fbtn.setVisibility(View.GONE);
         rv=view.findViewById(R.id.rv);
         registerResult();
         Dialog newDoc=new Dialog(context,R.style.Dialogbox_border);
@@ -140,7 +143,6 @@ public class DoctorListFragment extends Fragment {
                 website.setText("");
                 spec.setText("");
                 spec.clearFocus();
-                img.setImageResource(R.drawable.img);
                 img.setOnClickListener(view -> pickImg());
                 cancel.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -255,7 +257,7 @@ public class DoctorListFragment extends Fragment {
                         d.Id = ds.getId();
                         docs.add(d);
                     }
-                    dr = new DocsRecycle(docs, context);
+                    dr = new DocsRecycle(docs, context,resource);
                     rv.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
                     rv.setAdapter(dr);
                 }
@@ -273,4 +275,17 @@ public class DoctorListFragment extends Fragment {
         }
         dr.filterList(newdoclist);
     }
+    // Inside your Fragment class
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        // Assuming you have a reference to the hosting Activity
+        if (getActivity() != null) {
+            // Set the new title to the Toolbar in the hosting Activity
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Doctor List");
+        }
+    }
+
 }

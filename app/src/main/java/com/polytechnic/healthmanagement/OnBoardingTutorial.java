@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.polytechnic.healthmanagement.Admin.AdminMainActivity;
 import com.polytechnic.healthmanagement.UserLogin.LoginPage;
 
 public class OnBoardingTutorial extends AppCompatActivity {
@@ -26,47 +28,64 @@ public class OnBoardingTutorial extends AppCompatActivity {
         ll=findViewById(R.id.ll);
         next=findViewById(R.id.next);
         prev=findViewById(R.id.prev);
+        prev.setVisibility(View.GONE);
         skip=findViewById(R.id.skip);
-
-        next.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (getItem(0)<5){
-                    vp.setCurrentItem(getItem(1),true);
-                }
-                else{
-                    Intent i=new Intent(OnBoardingTutorial.this, LoginPage.class);
-                    startActivity(i);
-                    finish();
-                }
+        SharedPreferences login = getSharedPreferences("login",MODE_PRIVATE);
+        if(login.getBoolean("onBoardingTutorial",false)) {
+            Intent intent;
+            if(!login.getBoolean("user",false) && !login.getBoolean("admin",false)){
+                intent = new Intent(OnBoardingTutorial.this, LoginPage.class);
             }
-        });
+            else if(login.getBoolean("user",false)){
+                intent = new Intent(OnBoardingTutorial.this, MainActivity.class);
+            }
+            else{
+                intent = new Intent(OnBoardingTutorial.this, AdminMainActivity.class);
+            }
+            startActivity(intent);
+            finish();
+        }
+        else {
 
-        prev.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(getItem(0)>0){
-                    vp.setCurrentItem(getItem(-1),true);
+
+            next.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (getItem(0) < 5) {
+                        prev.setVisibility(View.GONE);
+                        vp.setCurrentItem(getItem(1), true);
+                    } else {
+                        intentmethod();
+                    }
                 }
 
-            }
-        });
 
-        skip.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i=new Intent(OnBoardingTutorial.this,LoginPage.class);
-                startActivity(i);
-                finish();
-            }
-        });
+            });
 
-        VPAdapter vpa=new VPAdapter(OnBoardingTutorial.this);
-        vp.setAdapter(vpa);
-        pageIndicators(0);
-        vp.addOnPageChangeListener(viewListener);
+            prev.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (getItem(0) > 0) {
+                        vp.setCurrentItem(getItem(-1), true);
+                    }
 
+                }
+            });
+
+            skip.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    intentmethod();
+                }
+            });
+
+            VPAdapter vpa = new VPAdapter(OnBoardingTutorial.this);
+            vp.setAdapter(vpa);
+            pageIndicators(0);
+            vp.addOnPageChangeListener(viewListener);
+        }
     }
+   
 
     public void pageIndicators(int posiiton){
         dots=new TextView[6];
@@ -106,11 +125,22 @@ public class OnBoardingTutorial extends AppCompatActivity {
         public void onPageScrollStateChanged(int state) {
 
         }
+        
     };
 
     public int getItem(int i){
         return vp.getCurrentItem()+i;
     }
-
+    private void intentmethod() {
+        Intent i=new Intent(OnBoardingTutorial.this, LoginPage.class);
+        SharedPreferences login = getSharedPreferences("login",MODE_PRIVATE);
+        SharedPreferences.Editor editor = login.edit();
+        editor.putBoolean("onBoardingTutorial",true);
+        editor.apply();
+        startActivity(i);
+        finish();
+    }
+   
+   
 
 }

@@ -18,6 +18,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -187,6 +190,15 @@ public class ExpensesFragment extends Fragment {
             }
         });
         popupMenu.show();
+    }
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        // Assuming you have a reference to the hosting Activity
+        if (getActivity() != null) {
+            // Set the new title to the Toolbar in the hosting Activity
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Expenses");
+        }
     }
 }
 
