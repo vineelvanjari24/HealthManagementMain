@@ -77,13 +77,14 @@ public class DoctorListFragment extends Fragment {
     CollectionReference docref=db.collection("Doctors");
     public StorageReference strref= FirebaseStorage.getInstance().getReference("uploads");
     Context context;
-    String resource;
+    String resource,key;
     public DoctorListFragment() {
         // Required empty public constructor
     }
-    public DoctorListFragment(Context context,String resource) {
+    public DoctorListFragment(Context context,String resource,String key) {
         this.context=context;
         this.resource=resource;
+        this.key=key;
     }
 
     @Override
@@ -91,7 +92,15 @@ public class DoctorListFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =inflater.inflate(R.layout.fragment_doctor_list, container, false);
+        if(key != null){
+            // load this specific
+            Toast.makeText(context, ""+key, Toast.LENGTH_SHORT).show();
 
+        }
+        else{
+            //load all doctors
+            Toast.makeText(context, "all doctors", Toast.LENGTH_SHORT).show();
+        }
         fbtn=view.findViewById(R.id.doc_fbtn);
         if(resource.equals("fromUser") || resource.equals("fromMainActivity"))
             fbtn.setVisibility(View.GONE);

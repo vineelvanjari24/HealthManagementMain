@@ -22,7 +22,7 @@ public class SplashScreen extends AppCompatActivity {
                 startActivity(new Intent(SplashScreen.this, OnBoardingTutorial.class));
                 finish();
             }
-        }, 1000);
+        }, 1);
         }
 
     }

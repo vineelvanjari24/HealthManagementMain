@@ -29,10 +29,13 @@ import com.polytechnic.healthmanagement.UserHealth.DataBase.UserHealthDB;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class AddUserHealthActivity extends AppCompatActivity {
 private TextView issueET,descriptionET;
 private  String issueString,descriptionString;
+public static String keyValue="null";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,8 +53,6 @@ private  String issueString,descriptionString;
         if(getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-
-
         ArrayAdapter problemRelatedToAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1,AddUserHealthActivity.probleRelatedToArrayList());
         problemRelatedToSpinner.setAdapter(problemRelatedToAdapter);
 
@@ -69,6 +70,7 @@ private  String issueString,descriptionString;
                         Toast.makeText(this, "Please enter description ", Toast.LENGTH_SHORT).show();
                 }
                 else {
+                    keyValue=problemRelatedToSpinner.getSelectedItem().toString();
                     Date currentDate = new Date();
                     SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yy h:mm:ss a"); // Add "ss" for seconds
                     String formattedDateTime = dateFormat.format(currentDate);
@@ -125,16 +127,39 @@ private  String issueString,descriptionString;
     }
     public static  ArrayList probleRelatedToArrayList(){
         ArrayList<String> problemRelatedToArrayList = new ArrayList<>();
-        problemRelatedToArrayList.add("Malaria");
-        problemRelatedToArrayList.add("Tuberculosis");
-        problemRelatedToArrayList.add("Diabetes");
-        problemRelatedToArrayList.add("Hypertension");
-        problemRelatedToArrayList.add("Dengue Fever");
-        problemRelatedToArrayList.add("Heart Disease");
-        problemRelatedToArrayList.add("Stroke");
-        problemRelatedToArrayList.add("Hepatitis");
-        problemRelatedToArrayList.add("Typhoid Fever");
-        problemRelatedToArrayList.add("Obstructive");
+        problemRelatedToArrayList.add("related to nerves");
+        problemRelatedToArrayList.add("related to lungs");
+        problemRelatedToArrayList.add("Heart Related disease");
+        problemRelatedToArrayList.add("Skin related disease");
+        problemRelatedToArrayList.add("tooth");
+        problemRelatedToArrayList.add("stomach related issues");
+        problemRelatedToArrayList.add("normal fever and other related issues");
         return problemRelatedToArrayList;
     }
+    public static HashMap<String,String> probleRelatedToDataMapping(){
+        HashMap<String,String> map = new HashMap<>();
+        map.put("Neurologist","related to nerves");
+        map.put("pulmotologist","related to lungs");
+        map.put("Cardiologist","Heart Related disease");
+        map.put("Dermatologist","Skin related disease");
+        map.put("Dentist","related to tooth");
+        map.put("Gastroenterology","stomach related issues");
+        map.put("General Doctor","normal fever and other related issues");
+        return  map;
+    }
+    public static  String findKeyByValue(HashMap<String, String> map,String value) {
+        for (Map.Entry<String, String> entry : map.entrySet()) {
+            if (entry.getValue().equals(value)) {
+                return entry.getKey();
+            }
+        }
+        return null; // Key not found
+    }
 }
+//Neurologist - related to nerves
+//pulmotologist - related to lungs
+//Cardiologist - Heart Related disease
+//Dermatologist - Skin related disease
+//Dentist - tooth
+//Gastroenterology - stomach related issues
+//General Doctor - normal fever and other related issues
