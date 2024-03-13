@@ -130,6 +130,7 @@ public class UserHealthAdapter extends RecyclerView.Adapter<UserHealthAdapter.Vi
                         public void onClick(DialogInterface dialogInterface, int i) {
                             Intent intent = new Intent(context, MainActivity.class);
                             intent.putExtra("flag",true);
+                            intent.putExtra("value",problemRelatedToSpinner.getSelectedItem().toString());
                             context.startActivity(intent);
                             dialogInterface.dismiss();
                         }

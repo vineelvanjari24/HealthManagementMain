@@ -51,7 +51,6 @@ public class MedAdapter extends RecyclerView.Adapter<MedAdapter.MedViewHolder> {
             @Override
             public boolean onLongClick(View v) {
                 if(!resource.equals("fromMainActivity")){
-
                     showMenu(v,mlistarr.get(position));
                 }
                 return true;

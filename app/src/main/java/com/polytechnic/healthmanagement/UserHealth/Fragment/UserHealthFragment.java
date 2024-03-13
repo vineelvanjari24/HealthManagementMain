@@ -2,13 +2,14 @@ package com.polytechnic.healthmanagement.UserHealth.Fragment;
 
 import static android.app.Activity.RESULT_OK;
 
+import static com.polytechnic.healthmanagement.UserHealth.AddUserHealthActivity.keyValue;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -18,15 +19,14 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.polytechnic.healthmanagement.DoctorList.Fragment.DoctorListFragment;
 import com.polytechnic.healthmanagement.R;
 import com.polytechnic.healthmanagement.UserHealth.AddUserHealthActivity;
 import com.polytechnic.healthmanagement.UserHealth.DataBase.UserHealthDB;
 import com.polytechnic.healthmanagement.UserHealth.Model.UserHealthModel;
 import com.polytechnic.healthmanagement.UserHealth.RecycleView.UserHealthAdapter;
-
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public class UserHealthFragment extends Fragment {
@@ -70,8 +70,9 @@ public class UserHealthFragment extends Fragment {
 
         if (requestCode == ADD_ITEM_REQUEST && resultCode == RESULT_OK) {
             FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
-            transaction.replace(R.id.frameLayoutDrawable,
-                    new DoctorListFragment(context,"fromUser"));
+            HashMap<String,String> map =AddUserHealthActivity.probleRelatedToDataMapping();
+            String key = AddUserHealthActivity.findKeyByValue(map,keyValue);
+            transaction.replace(R.id.frameLayoutDrawable, new DoctorListFragment(context,"fromUser",key));
             transaction.addToBackStack(null);
             transaction.commit();
         }

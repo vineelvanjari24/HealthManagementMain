@@ -1,6 +1,8 @@
 package com.polytechnic.healthmanagement;
 
 
+import static com.polytechnic.healthmanagement.UserHealth.AddUserHealthActivity.keyValue;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,15 +18,19 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 import com.polytechnic.healthmanagement.TrackYourHealth.Fragment.TrackYourHealthFragment;
 import com.polytechnic.healthmanagement.Expenses.Fragment.ExpensesFragment;
 import com.polytechnic.healthmanagement.MedicalList.Fragment.MedicalListFragment;
 import com.polytechnic.healthmanagement.DoctorList.Fragment.DoctorListFragment;
+import com.polytechnic.healthmanagement.UserHealth.AddUserHealthActivity;
 import com.polytechnic.healthmanagement.UserHealth.Fragment.UserHealthFragment;
 import com.polytechnic.healthmanagement.UserLogin.AdminLogin;
 import com.polytechnic.healthmanagement.UserLogin.LoginPage;
+
+import java.util.HashMap;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -61,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
 
                 }
                 else if (id==R.id.doctorList) {
-                    loadFragment(new DoctorListFragment(MainActivity.this,"fromMainActivity"),false,"DoctorListFragmentTag");
+                    loadFragment(new DoctorListFragment(MainActivity.this,"fromMainActivity",null),false,"DoctorListFragmentTag");
                 }
                 else if (id==R.id.medicalList) {
                     loadFragment(new MedicalListFragment(MainActivity.this,"fromMainActivity"),false,"MedicalListFragmentTag");
@@ -78,7 +84,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         if(getIntent().getBooleanExtra("flag",false)){
-            loadFragment(new DoctorListFragment(MainActivity.this,"fromUser"),false,"DoctorListFragmentTag");
+            String keyValue=getIntent().getStringExtra("value");
+            HashMap<String,String> map = AddUserHealthActivity.probleRelatedToDataMapping();
+            String key = AddUserHealthActivity.findKeyByValue(map,keyValue);
+
+            loadFragment(new DoctorListFragment(MainActivity.this,"fromUser",key),false,"DoctorListFragmentTag");
         }
 
     }
