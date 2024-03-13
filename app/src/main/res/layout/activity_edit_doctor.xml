@@ -59,13 +59,14 @@
                 android:layout_height="wrap_content"
                 android:hint="Doctor Specification"
                 >
-                <EditText
-                    android:id="@+id/edoc_spec"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:inputType="text"
-                    android:textSize="@dimen/_14sdp"
-
+                <Spinner
+                    android:background="@drawable/dialogbox_border"
+                    android:id="@+id/editDoc_docspec"
+                    android:layout_width="@dimen/_140sdp"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_weight="1"
+                    android:foreground="@drawable/arrow_drop_down"
+                    android:foregroundGravity="center|right"
                     />
             </com.google.android.material.textfield.TextInputLayout>
             <TextView

@@ -11,5 +11,4 @@ public class UserHealthModel {
         this.editedDate=editedDate;
         this.id=id;
     }
-
 }

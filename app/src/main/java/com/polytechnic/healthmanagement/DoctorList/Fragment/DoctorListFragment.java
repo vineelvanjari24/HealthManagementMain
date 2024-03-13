@@ -18,10 +18,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -56,16 +58,19 @@ import com.polytechnic.healthmanagement.DoctorList.DoctorActivity;
 import com.polytechnic.healthmanagement.DoctorList.RecycleView.DoctorAdapter;
 import com.polytechnic.healthmanagement.MedicalList.Fragment.Medicine;
 import com.polytechnic.healthmanagement.R;
+import com.polytechnic.healthmanagement.UserHealth.AddUserHealthActivity;
 import com.polytechnic.healthmanagement.UserHealth.RecycleView.UserHealthAdapter;
 
 import java.util.ArrayList;
 
 
 public class DoctorListFragment extends Fragment {
+    ArrayList<String> specList=new ArrayList<>();
     private ActivityResultLauncher<Intent> gallerylauncher;
     RecyclerView rv;
     FloatingActionButton fbtn;
-    EditText name,exp,spec,work,des,search,website;
+    EditText name,exp,work,des,search,website;
+    Spinner spec;
     Button save,cancel;
     DocsRecycle dr;
     ImageView img;
@@ -112,7 +117,16 @@ public class DoctorListFragment extends Fragment {
         cancel=newDoc.findViewById(R.id.doc_cancel);
         name=newDoc.findViewById(R.id.doc_name);
         exp=newDoc.findViewById(R.id.doc_exp);
-        spec=newDoc.findViewById(R.id.doc_spec);
+        spec=newDoc.findViewById(R.id.docList_docspec);
+        specList.add("Neurologist");
+        specList.add("pulmotologist");
+        specList.add("Cardiologist");
+        specList.add("Dermatologist");
+        specList.add("Dentist");
+        specList.add("Gastroenterology");
+        specList.add("General Doctor");
+        ArrayAdapter specAdapter = new ArrayAdapter(getContext(),android.R.layout.simple_list_item_1, specList);
+        spec.setAdapter(specAdapter);
         work=newDoc.findViewById(R.id.doc_work);
         des=newDoc.findViewById(R.id.doc_desc);
         img=newDoc  .findViewById(R.id.doc_img);
@@ -150,8 +164,6 @@ public class DoctorListFragment extends Fragment {
                 des.setText("");
                 work.setText("");
                 website.setText("");
-                spec.setText("");
-                spec.clearFocus();
                 img.setOnClickListener(view -> pickImg());
                 cancel.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -167,7 +179,7 @@ public class DoctorListFragment extends Fragment {
                         Doctor d=new Doctor();
                         d.name=name.getText().toString();
                         d.exp=Integer.parseInt(String.valueOf(exp.getText()));
-                        d.spec=spec.getText().toString();
+                        d.spec=spec.getSelectedItem().toString();
                         d.work=work.getText().toString();
                         d.desc=des.getText().toString();
                         d.website=website.getText().toString();

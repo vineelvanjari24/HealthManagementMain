@@ -6,8 +6,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.MimeTypeMap;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,9 +29,13 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.polytechnic.healthmanagement.R;
+import com.polytechnic.healthmanagement.UserHealth.AddUserHealthActivity;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
+
 public class EditDoctor extends AppCompatActivity {
+    ArrayList<String> specList=new ArrayList<>();
     private ActivityResultLauncher<Intent> gallerylauncher;
     public final int GALLERY_REQUEST_CODE=1000;
     Uri imageUri;
@@ -37,7 +43,8 @@ public class EditDoctor extends AppCompatActivity {
     CollectionReference docref=db.collection("Doctors");
     public StorageReference strref= FirebaseStorage.getInstance().getReference("uploads");
     Button save,cancel;
-    TextView name,exp,spec,work,des,website;
+    TextView name,exp,work,des,website;
+    Spinner spec;
     ImageView img;
     Doctor editDoc=new Doctor();
     @Override
@@ -61,15 +68,22 @@ public class EditDoctor extends AppCompatActivity {
         cancel=findViewById(R.id.edoc_cancel);
         name=findViewById(R.id.edoc_name);
         exp=findViewById(R.id.edoc_exp);
-        spec=findViewById(R.id.edoc_spec);
+        spec=findViewById(R.id.editDoc_docspec);
         work=findViewById(R.id.edoc_work);
         des=findViewById(R.id.edoc_desc);
         website=findViewById(R.id.edit_doc_website);
         img=findViewById(R.id.edoc_img);
-
+        specList.add("Neurologist");
+        specList.add("pulmotologist");
+        specList.add("Cardiologist");
+        specList.add("Dermatologist");
+        specList.add("Dentist");
+        specList.add("Gastroenterology");
+        specList.add("General Doctor");
+        ArrayAdapter specAdapter = new ArrayAdapter(getApplicationContext(),android.R.layout.simple_list_item_1, specList);
+        spec.setAdapter(specAdapter);
         img.setOnClickListener(view->pickImg());
         name.setText(editDoc.name);
-        spec.setText(editDoc.spec);
         work.setText(editDoc.work);
         des.setText(editDoc.desc);
         website.setText(editDoc.website);
@@ -90,7 +104,7 @@ public class EditDoctor extends AppCompatActivity {
                 Doctor d=new Doctor();
                 d.name=name.getText().toString();
                 d.exp=Integer.parseInt(String.valueOf(exp.getText()));
-                d.spec=spec.getText().toString();
+                d.spec=spec.getSelectedItem().toString();
                 d.work=work.getText().toString();
                 d.desc=des.getText().toString();
                 d.website=website.getText().toString();
