@@ -51,7 +51,7 @@ public class OnBoardingTutorial extends AppCompatActivity {
             next.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (getItem(0) < 5) {
+                    if (getItem(0) < 4) {
                         prev.setVisibility(View.GONE);
                         vp.setCurrentItem(getItem(1), true);
                     } else {

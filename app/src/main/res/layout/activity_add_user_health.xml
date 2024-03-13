@@ -66,13 +66,7 @@
 
                 />
         </com.google.android.material.textfield.TextInputLayout>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Upload Images"
-            android:textSize="@dimen/_30sdp"
-            android:textAlignment="center"
-            />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

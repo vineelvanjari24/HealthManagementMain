@@ -131,7 +131,7 @@ public static String keyValue="null";
         problemRelatedToArrayList.add("related to lungs");
         problemRelatedToArrayList.add("Heart Related disease");
         problemRelatedToArrayList.add("Skin related disease");
-        problemRelatedToArrayList.add("tooth");
+        problemRelatedToArrayList.add("related to tooth");
         problemRelatedToArrayList.add("stomach related issues");
         problemRelatedToArrayList.add("normal fever and other related issues");
         return problemRelatedToArrayList;

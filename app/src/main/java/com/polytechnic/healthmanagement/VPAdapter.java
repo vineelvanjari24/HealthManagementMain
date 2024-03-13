@@ -12,7 +12,7 @@ import androidx.viewpager.widget.PagerAdapter;
 
 public class VPAdapter extends PagerAdapter {
     Context ct;
-    int images[]={R.drawable.img,R.drawable.img,R.drawable.img,R.drawable.img,R.drawable.img,R.drawable.img};
+    int images[]={R.drawable.t1,R.drawable.t2,R.drawable.t3,R.drawable.t4,R.drawable.t5};
 
     public VPAdapter(Context c){
         ct=c;

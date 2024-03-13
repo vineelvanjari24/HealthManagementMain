@@ -6,7 +6,7 @@
     android:layout_height="@dimen/_75sdp"
     app:cardCornerRadius="@dimen/_5sdp"
     android:backgroundTint="@color/lightblue"
-    android:layout_margin="@dimen/_5sdp"
+    android:layout_margin="@dimen/_7sdp"
     android:orientation="vertical"
     android:foreground="?attr/selectableItemBackground"
     xmlns:app="http://schemas.android.com/apk/res-auto">

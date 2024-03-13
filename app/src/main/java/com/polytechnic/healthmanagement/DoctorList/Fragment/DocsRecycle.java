@@ -60,7 +60,7 @@ public class DocsRecycle extends RecyclerView.Adapter<DocsRecycle.DocsViewHolder
         holder.cv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Dialog docdet=new Dialog(v.getContext());
+                Dialog docdet=new Dialog(v.getContext(),R.style.Dialogbox_border);
                 docdet.setContentView(R.layout.doc_details);
                 docdet.setCancelable(false);
                 if(resource.equals("fromUser") || resource.equals("fromMainActivity")){
