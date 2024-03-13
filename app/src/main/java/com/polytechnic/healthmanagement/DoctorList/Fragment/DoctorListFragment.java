@@ -48,6 +48,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
@@ -97,15 +98,7 @@ public class DoctorListFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =inflater.inflate(R.layout.fragment_doctor_list, container, false);
-        if(key != null){
-            // load this specific
-            Toast.makeText(context, ""+key, Toast.LENGTH_SHORT).show();
 
-        }
-        else{
-            //load all doctors
-            Toast.makeText(context, "all doctors", Toast.LENGTH_SHORT).show();
-        }
         fbtn=view.findViewById(R.id.doc_fbtn);
         if(resource.equals("fromUser") || resource.equals("fromMainActivity"))
             fbtn.setVisibility(View.GONE);
@@ -272,15 +265,40 @@ public class DoctorListFragment extends Fragment {
                 }
                 if (value != null) {
                     docs.clear();
-                    for (QueryDocumentSnapshot ds : value) {
-                        Doctor d = new Doctor();
-                        d = ds.toObject(Doctor.class);
-                        d.Id = ds.getId();
-                        docs.add(d);
+                    if (key == null) {
+                        for (QueryDocumentSnapshot ds : value) {
+                            Doctor d = new Doctor();
+                            d = ds.toObject(Doctor.class);
+                            d.Id = ds.getId();
+                            docs.add(d);
+                        }
+                        dr = new DocsRecycle(docs, context, resource);
+                        rv.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
+                        rv.setAdapter(dr);
+                    } else {
+                        Toast.makeText(context, "" + key, Toast.LENGTH_SHORT).show();
+                        Query query = FirebaseFirestore.getInstance().collection("Doctors")
+                                .whereEqualTo("spec", key); // Add your filter criteria here
+                        query.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                                    @Override
+                                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                                        for (QueryDocumentSnapshot ds : queryDocumentSnapshots) {
+                                            Doctor d = ds.toObject(Doctor.class);
+                                            d.Id = ds.getId();
+                                            docs.add(d);
+                                        }
+                                        dr = new DocsRecycle(docs, context, resource);
+                                        rv.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
+                                        rv.setAdapter(dr);
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(context, "Failed To Load Doctors", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
                     }
-                    dr = new DocsRecycle(docs, context,resource);
-                    rv.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
-                    rv.setAdapter(dr);
                 }
             }
         });
